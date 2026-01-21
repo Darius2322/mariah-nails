@@ -1835,8 +1835,8 @@
                     </div>
                     <div class="contact-text">
                         <h4>Call Us</h4>
-                        <p>+254 712 345 678</p>
-                        <p>+254 734 567 890</p>
+                        <p>+254 741 148 601</p>
+                        <p>+254 741 148 601</p>
                     </div>
                 </div>
                 
@@ -1858,12 +1858,13 @@
                     <div class="contact-text">
                         <h4>Working Hours</h4>
                         <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
-                        <p>Saturday - Sunday: 10:00 AM - 6:00 PM</p>
+                        <p>Saturday: NIKO CHURCH</p>
+                        <p>Sunday: 10:00 AM - 6:00 PM</p>
                     </div>
                 </div>
                 
                 <div class="social-links reveal">
-                    <a href="https://wa.me/254712345678" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/254741148601" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://www.instagram.com/litemaria.nailartstudio?igsh=ZXUwb3diMDgxOHZw" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
@@ -1944,7 +1945,7 @@
                 <li>Pets should be secured during service</li>
             </ul>
             
-            <p>Last updated: April 2024</p>
+            <p>Last updated: 21 January 2026</p>
         </div>
     </section>
 
@@ -1955,7 +1956,7 @@
                 <h3>Maria Nail Art Studio</h3>
                 <p>Premium nail care services in Nairobi, Kenya. Experience luxury and professionalism at our studio or in the comfort of your home.</p>
                 <div class="social-links">
-                    <a href="https://wa.me/254712345678" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/254741148601" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://www.instagram.com/litemaria.nailartstudio?igsh=ZXUwb3diMDgxOHZw" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
@@ -2040,7 +2041,7 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2024 Maria Nail Art Studio. All rights reserved. | Nairobi, Kenya</p>
+            <p>&copy; 2026 Maria Nail Art Studio. All rights reserved. | Nairobi, Kenya</p>
             <p>Designed with <i class="fas fa-heart" style="color: var(--primary-pink);"></i> for nail care enthusiasts</p>
         </div>
     </footer>
@@ -2466,7 +2467,7 @@
     </div>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/254712345678?text=Hi%20Maria%20Nail%20Studio%2C%20I%20have%20a%20question" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/254741148601?text=Hi%20Maria%20Nail%20Studio%2C%20I%20have%20a%20question" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -2551,8 +2552,8 @@
 
         // Default users
         const defaultUsers = {
-            "254712345678": {
-                phone: "+254 712 345 678",
+            "254741148601": {
+                phone: "+254 741 148 601",
                 password: "nail123",
                 name: "Jane Doe",
                 email: "jane@example.com",
@@ -2562,8 +2563,8 @@
                 profilePicture: null,
                 isGuest: false
             },
-            "254734567890": {
-                phone: "+254 734 567 890",
+            "254741148602": {
+                phone: "+254 741 148 602",
                 password: "nail123",
                 name: "John Smith",
                 email: "john@example.com",
@@ -2678,6 +2679,9 @@
         const closeTermsModal = document.getElementById('closeTermsModal');
         const acceptTermsCheckbox = document.getElementById('acceptTerms');
         const confirmTermsBtn = document.getElementById('confirmTermsBtn');
+
+        // Website URL
+        const WEBSITE_URL = "https://darius2322.github.io/mariah-nails/";
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -3084,13 +3088,15 @@
             // Navigation links
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href');
-                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
-                    navLinks.classList.remove('active');
-                    
-                    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
+                    if (link.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = link.getAttribute('href');
+                        document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                        navLinks.classList.remove('active');
+                        
+                        document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                    }
                 });
             });
             
@@ -3193,7 +3199,7 @@
             if (whatsappDeveloperBtn) {
                 whatsappDeveloperBtn.addEventListener('click', () => {
                     const message = encodeURIComponent(`Hello Developer,\n\nI saw your work on Maria Nail Studio website and I'm interested in:\n\n1. Website Development\n2. Mobile App Design\n3. Booking System\n\nPlease send me more information about your services and pricing.\n\nThank you!`);
-                    const whatsappUrl = `https://wa.me/254700000000?text=${message}`;
+                    const whatsappUrl = `https://wa.me/254110554040?text=${message}`;
                     window.open(whatsappUrl, '_blank');
                 });
             }
@@ -3284,7 +3290,7 @@
                 developerDetails.style.display = developerDetails.style.display === 'none' ? 'block' : 'none';
             } else {
                 const message = encodeURIComponent(`Hello Developer,\n\nI'm interested in your web development services for my business.\n\nPlease contact me for a discussion.\n\nThank you!`);
-                const whatsappUrl = `https://wa.me/254700000000?text=${message}`;
+                const whatsappUrl = `https://wa.me/254110554040?text=${message}`;
                 window.open(whatsappUrl, '_blank');
             }
         }
@@ -3821,7 +3827,7 @@
                     address: document.querySelector('input[name="location"]:checked').value === 'home' 
                         ? document.getElementById('homeAddress').value 
                         : ''
-                };
+            };
             }
             
             const bookingDate = new Date(bookingData.date);
@@ -3844,7 +3850,7 @@
             if (bookingData.notes) message += `*Notes:* ${bookingData.notes}\n`;
             
             const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/254712345678?text=${encodedMessage}`;
+            const whatsappUrl = `https://wa.me/254741148601?text=${encodedMessage}`;
             
             window.open(whatsappUrl, '_blank');
             showBookingConfirmation();
@@ -3984,15 +3990,13 @@
         // Share via WhatsApp
         function shareViaWhatsApp() {
             const shareText = "Check out Maria Nail Art Studio! Beautiful nail services with professional care. Book your appointment now!";
-            const url = window.location.href;
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + url)}`;
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + WEBSITE_URL)}`;
             window.open(whatsappUrl, '_blank');
         }
 
         // Copy link to clipboard
         function copyLink() {
-            const url = window.location.href;
-            navigator.clipboard.writeText(url).then(() => {
+            navigator.clipboard.writeText(WEBSITE_URL).then(() => {
                 alert('Website link copied to clipboard!');
             }).catch(err => {
                 console.error('Failed to copy: ', err);
@@ -4002,16 +4006,15 @@
 
         // Share on Facebook
         function shareOnFacebook() {
-            const url = encodeURIComponent(window.location.href);
+            const url = encodeURIComponent(WEBSITE_URL);
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
         }
 
         // Generate QR Code
         function generateQRCode() {
-            const url = window.location.href;
             document.getElementById('qrcode').innerHTML = '';
             new QRCode(document.getElementById('qrcode'), {
-                text: url,
+                text: WEBSITE_URL,
                 width: 200,
                 height: 200,
                 colorDark: "#000000",
@@ -4052,7 +4055,7 @@
                         <h3>Maria Nail Art Studio</h3>
                         <p>Westlands Shopping Mall, 3rd Floor</p>
                         <p>Nairobi, Kenya</p>
-                        <p>+254 712 345 678 | info@marianailstudio.co.ke</p>
+                        <p>+254 741 148 601 | info@marianailstudio.co.ke</p>
                     </div>
                     
                     <div class="receipt-details">
@@ -4132,7 +4135,7 @@
             doc.setFontSize(10);
             doc.setTextColor(0, 0, 0);
             doc.text("Westlands Shopping Mall, 3rd Floor", 105, 30, null, null, 'center');
-            doc.text("Nairobi, Kenya | +254 712 345 678", 105, 35, null, null, 'center');
+            doc.text("Nairobi, Kenya | +254 741 148 601", 105, 35, null, null, 'center');
             doc.text("info@marianailstudio.co.ke", 105, 40, null, null, 'center');
             
             doc.setFontSize(12);
