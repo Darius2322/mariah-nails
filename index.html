@@ -159,12 +159,12 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             list-style: none;
         }
 
@@ -172,9 +172,10 @@
             text-decoration: none;
             color: var(--dark-gray);
             font-weight: 500;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.75rem;
             border-radius: 2rem;
             transition: var(--transition);
+            white-space: nowrap;
         }
 
         .nav-links a:hover {
@@ -189,11 +190,14 @@
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
+        /* Mobile Search - Initially Hidden */
         .search-container {
             position: relative;
+            display: flex;
+            align-items: center;
         }
 
         #searchInput {
@@ -204,6 +208,7 @@
             color: var(--dark-gray);
             width: 200px;
             transition: var(--transition);
+            display: block;
         }
 
         #searchInput:focus {
@@ -213,14 +218,47 @@
         }
 
         .search-icon {
-            position: absolute;
-            left: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
             color: var(--medium-gray);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
         }
 
-        .theme-toggle, .account-btn, .cart-btn {
+        .search-icon:hover {
+            background-color: var(--light-pink);
+        }
+
+        .search-icon.active {
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+        }
+
+        .search-mobile {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            z-index: 999;
+        }
+
+        .search-mobile.active {
+            display: block;
+        }
+
+        .search-mobile-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--primary-pink);
+            border-radius: 2rem;
+            font-size: 1rem;
+        }
+
+        .theme-toggle, .account-btn {
             background: none;
             border: none;
             font-size: 1.25rem;
@@ -229,9 +267,14 @@
             padding: 0.5rem;
             border-radius: 50%;
             transition: var(--transition);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .theme-toggle:hover, .account-btn:hover, .cart-btn:hover {
+        .theme-toggle:hover, .account-btn:hover {
             background-color: var(--light-pink);
         }
 
@@ -242,11 +285,18 @@
             font-size: 1.5rem;
             color: var(--dark-gray);
             cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: var(--light-pink);
         }
 
         /* Hero Section */
         .hero {
-            padding: 5rem 2rem;
+            padding: 4rem 1.5rem;
             text-align: center;
             max-width: 1200px;
             margin: 0 auto;
@@ -255,7 +305,7 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: var(--dark-gray);
             margin-bottom: 1rem;
@@ -263,7 +313,7 @@
         }
 
         .slogan-large {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--primary-pink);
             margin-bottom: 2rem;
@@ -275,23 +325,25 @@
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--medium-gray);
             max-width: 800px;
             margin: 0 auto 3rem;
+            padding: 0 1rem;
         }
 
         .hero-buttons {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
+            padding: 0 1rem;
         }
 
         .btn {
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             border-radius: 2rem;
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
@@ -299,6 +351,8 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            min-width: 200px;
+            justify-content: center;
         }
 
         .btn-primary {
@@ -354,35 +408,38 @@
         .btn-small {
             padding: 0.5rem 1rem;
             font-size: 0.875rem;
+            min-width: auto;
         }
 
         /* Services Section */
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             font-weight: 700;
             color: var(--dark-gray);
             margin-bottom: 1rem;
+            padding: 0 1rem;
         }
 
         .section-subtitle {
             text-align: center;
             color: var(--medium-gray);
-            font-size: 1.125rem;
+            font-size: 1.1rem;
             margin-bottom: 3rem;
+            padding: 0 1rem;
         }
 
         .services, .about, .contact-section, .terms-section {
-            padding: 5rem 2rem;
+            padding: 4rem 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* Two Column Grid Layout */
+        /* Two Column Grid Layout - Mobile Optimized */
         .two-column-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr;
+            gap: 3rem;
             align-items: center;
             margin-bottom: 4rem;
         }
@@ -391,36 +448,54 @@
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--shadow);
-            height: 400px;
+            height: 300px;
             background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 4rem;
+            font-size: 3rem;
+            order: 2;
+        }
+
+        .grid-content {
+            order: 1;
         }
 
         .grid-content h3 {
-            font-size: 2rem;
+            font-size: 1.75rem;
             margin-bottom: 1.5rem;
             color: var(--dark-gray);
+            line-height: 1.3;
         }
 
         .grid-content p {
             margin-bottom: 1.5rem;
             color: var(--medium-gray);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Alternate order for mobile */
+        .two-column-grid.reverse-mobile .grid-image {
+            order: 2;
+        }
+
+        .two-column-grid.reverse-mobile .grid-content {
+            order: 1;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 0 1rem;
         }
 
         .service-card {
             background-color: var(--white);
             border-radius: var(--border-radius);
-            padding: 2rem;
+            padding: 1.5rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
             display: flex;
@@ -434,8 +509,8 @@
         }
 
         .service-icon {
-            width: 4rem;
-            height: 4rem;
+            width: 3.5rem;
+            height: 3.5rem;
             background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
             border-radius: 50%;
             display: flex;
@@ -459,16 +534,19 @@
         }
 
         .service-name {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--dark-gray);
             margin-bottom: 0.75rem;
+            line-height: 1.3;
         }
 
         .service-description {
             color: var(--medium-gray);
             margin-bottom: 1.5rem;
             flex-grow: 1;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .service-details {
@@ -476,10 +554,12 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .service-price {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary-pink);
         }
@@ -489,6 +569,7 @@
             align-items: center;
             gap: 0.5rem;
             color: var(--medium-gray);
+            font-size: 0.9rem;
         }
 
         .service-btn {
@@ -496,11 +577,12 @@
             background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
             color: var(--white);
             border: none;
-            padding: 1rem;
+            padding: 0.875rem;
             border-radius: 0.75rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            font-size: 1rem;
         }
 
         .service-btn:hover {
@@ -526,9 +608,9 @@
         .modal-content {
             background-color: var(--white);
             border-radius: var(--border-radius);
-            padding: 2.5rem;
-            width: 90%;
-            max-width: 600px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2);
@@ -550,11 +632,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
         }
 
         .modal-title {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--dark-gray);
         }
@@ -580,7 +664,7 @@
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .form-group label {
@@ -588,6 +672,7 @@
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: var(--dark-gray);
+            font-size: 0.95rem;
         }
 
         .form-group input,
@@ -600,6 +685,7 @@
             background-color: var(--white);
             color: var(--dark-gray);
             transition: var(--transition);
+            font-size: 1rem;
         }
 
         .form-group input:focus,
@@ -611,14 +697,13 @@
         }
 
         .radio-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
         }
 
         .radio-option {
             flex: 1;
-            min-width: 120px;
         }
 
         .radio-option input {
@@ -633,6 +718,7 @@
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
+            font-size: 0.95rem;
         }
 
         .radio-option input:checked + label {
@@ -643,16 +729,15 @@
 
         /* Account Menu */
         .account-menu {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 0.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
+            margin-bottom: 1.5rem;
             width: 100%;
         }
 
         .account-menu-item {
-            padding: 0.75rem 1rem;
+            padding: 0.75rem;
             background: var(--light-gray);
             border-radius: 0.5rem;
             border: none;
@@ -665,20 +750,18 @@
             align-items: center;
             gap: 0.5rem;
             transition: var(--transition);
-            flex: 1;
-            min-width: 100px;
-            max-width: 150px;
-            position: relative;
+            min-height: 70px;
+            justify-content: center;
         }
 
         .account-menu-item i {
             font-size: 1.25rem;
-            width: auto;
         }
 
         .account-menu-item span {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             display: block;
+            line-height: 1.2;
         }
 
         .account-menu-item.active {
@@ -695,9 +778,9 @@
         .account-modal-content {
             background-color: var(--white);
             border-radius: var(--border-radius);
-            padding: 2rem;
-            width: 90%;
-            max-width: 800px;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 500px;
             max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2);
@@ -711,8 +794,8 @@
         }
 
         .profile-picture {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             margin: 0 auto 1.5rem;
             background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
@@ -720,7 +803,7 @@
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 3rem;
+            font-size: 2.5rem;
             position: relative;
             overflow: hidden;
             border: 3px solid var(--white);
@@ -750,11 +833,11 @@
         }
 
         .profile-info {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .profile-info h4 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
             color: var(--dark-gray);
         }
@@ -762,28 +845,31 @@
         .profile-info p {
             color: var(--medium-gray);
             margin-bottom: 0.25rem;
+            font-size: 0.95rem;
         }
 
         .profile-stats {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
             margin: 1.5rem 0;
         }
 
         .stat {
             text-align: center;
+            padding: 0.5rem;
         }
 
         .stat-value {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--primary-pink);
         }
 
         .stat-label {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             color: var(--medium-gray);
+            margin-top: 0.25rem;
         }
 
         /* Settings Section */
@@ -794,6 +880,7 @@
         .settings-section h3 {
             margin-bottom: 1.5rem;
             color: var(--dark-gray);
+            font-size: 1.4rem;
         }
 
         .settings-form {
@@ -802,7 +889,8 @@
         }
 
         .form-actions {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 1rem;
             margin-top: 2rem;
         }
@@ -826,6 +914,7 @@
             border: none;
             color: var(--medium-gray);
             cursor: pointer;
+            padding: 0.5rem;
         }
 
         .guest-login {
@@ -844,7 +933,7 @@
         .order-card {
             background-color: var(--white);
             border-radius: var(--border-radius);
-            padding: 1.5rem;
+            padding: 1.25rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--light-gray);
             position: relative;
@@ -852,8 +941,8 @@
 
         .order-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 0.75rem;
             margin-bottom: 1rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--light-gray);
@@ -862,11 +951,13 @@
         .order-info h4 {
             margin-bottom: 0.5rem;
             color: var(--dark-gray);
+            font-size: 1.2rem;
         }
 
         .order-info p {
             color: var(--medium-gray);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            line-height: 1.4;
         }
 
         .order-status {
@@ -874,6 +965,7 @@
             border-radius: 1rem;
             font-size: 0.75rem;
             font-weight: 600;
+            align-self: flex-start;
         }
 
         .status-completed {
@@ -909,6 +1001,7 @@
             justify-content: space-between;
             padding: 0.5rem 0;
             border-bottom: 1px dashed var(--light-gray);
+            font-size: 0.95rem;
         }
 
         .order-total {
@@ -918,26 +1011,27 @@
             padding: 1rem 0;
             border-top: 2px solid var(--light-gray);
             margin-top: 1rem;
+            font-size: 1.1rem;
         }
 
         .order-actions {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 0.5rem;
-            flex-wrap: wrap;
         }
 
         /* Notifications Section */
         .notifications-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 1rem;
             margin-bottom: 1.5rem;
         }
 
         .notification {
             background-color: var(--white);
             border-radius: var(--border-radius);
-            padding: 1.5rem;
+            padding: 1.25rem;
             margin-bottom: 1rem;
             box-shadow: var(--shadow);
             display: flex;
@@ -961,6 +1055,7 @@
             justify-content: center;
             color: var(--white);
             flex-shrink: 0;
+            font-size: 1rem;
         }
 
         .notification-icon.info {
@@ -990,11 +1085,13 @@
         .notification-content h4 {
             margin-bottom: 0.25rem;
             color: var(--dark-gray);
+            font-size: 1.1rem;
         }
 
         .notification-content p {
             color: var(--medium-gray);
             font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         .notification-time {
@@ -1022,19 +1119,20 @@
         /* Share Section */
         .share-section {
             text-align: center;
-            padding: 2rem 0;
+            padding: 1rem 0;
         }
 
         .share-section h3 {
             margin-bottom: 1.5rem;
             color: var(--dark-gray);
+            font-size: 1.4rem;
         }
 
         .share-actions {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 1rem;
-            max-width: 300px;
+            max-width: 400px;
             margin: 0 auto;
         }
 
@@ -1049,6 +1147,7 @@
             justify-content: center;
             gap: 0.5rem;
             transition: var(--transition);
+            font-size: 1rem;
         }
 
         .share-btn-primary {
@@ -1074,8 +1173,8 @@
         /* Contact Section */
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr;
+            gap: 3rem;
         }
 
         .contact-info {
@@ -1099,21 +1198,26 @@
             justify-content: center;
             color: var(--white);
             flex-shrink: 0;
+            font-size: 1.25rem;
         }
 
         .contact-text h4 {
             margin-bottom: 0.25rem;
             color: var(--dark-gray);
+            font-size: 1.2rem;
         }
 
         .contact-text p {
             color: var(--medium-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         .social-links {
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .social-link {
@@ -1127,6 +1231,7 @@
             color: var(--dark-gray);
             text-decoration: none;
             transition: var(--transition);
+            font-size: 1rem;
         }
 
         .social-link:hover {
@@ -1139,8 +1244,8 @@
         footer {
             background-color: var(--dark-gray);
             color: var(--white);
-            padding: 4rem 2rem 2rem;
-            margin-top: 5rem;
+            padding: 3rem 1.5rem 2rem;
+            margin-top: 4rem;
         }
 
         .footer-content {
@@ -1148,8 +1253,8 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .footer-column h3 {
@@ -1170,6 +1275,7 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: var(--transition);
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
@@ -1189,6 +1295,7 @@
             border-radius: 0.5rem;
             background-color: rgba(255, 255, 255, 0.1);
             color: var(--white);
+            font-size: 0.95rem;
         }
 
         .newsletter-form input::placeholder {
@@ -1202,15 +1309,18 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         /* QR Code Modal */
         .qr-modal-content {
             text-align: center;
+            padding: 1rem;
         }
 
         #qrcode {
-            margin: 2rem auto;
+            margin: 1.5rem auto;
             padding: 1rem;
             background: white;
             border-radius: 0.5rem;
@@ -1219,12 +1329,12 @@
 
         /* Receipt Modal */
         .receipt-modal-content {
-            max-width: 800px;
+            max-width: 500px;
         }
 
         .receipt {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 0.5rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             font-family: 'Courier New', monospace;
@@ -1232,7 +1342,7 @@
 
         .receipt-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border-bottom: 2px dashed #ccc;
             padding-bottom: 1rem;
         }
@@ -1240,10 +1350,11 @@
         .receipt-header h3 {
             color: var(--primary-pink);
             margin-bottom: 0.5rem;
+            font-size: 1.3rem;
         }
 
         .receipt-details {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .receipt-item {
@@ -1252,13 +1363,14 @@
             margin-bottom: 0.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px dashed #eee;
+            font-size: 0.95rem;
         }
 
         .receipt-total {
             display: flex;
             justify-content: space-between;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-top: 1rem;
             padding-top: 1rem;
             border-top: 2px dashed #ccc;
@@ -1266,18 +1378,19 @@
 
         .receipt-footer {
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 1px solid #eee;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #666;
+            line-height: 1.4;
         }
 
         /* Floating WhatsApp Button */
         .whatsapp-float {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1.5rem;
+            right: 1.5rem;
             width: 3.5rem;
             height: 3.5rem;
             background-color: var(--whatsapp-green);
@@ -1303,6 +1416,7 @@
             position: fixed;
             top: 1rem;
             right: 1rem;
+            left: 1rem;
             background-color: var(--success-green);
             color: var(--white);
             padding: 1rem 1.5rem;
@@ -1313,6 +1427,8 @@
             z-index: 1001;
             box-shadow: var(--shadow);
             animation: slideIn 0.3s ease-out;
+            text-align: center;
+            justify-content: center;
         }
 
         @keyframes slideIn {
@@ -1349,20 +1465,21 @@
 
         /* Orders Filter */
         .orders-filter {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.5rem;
             margin-bottom: 1.5rem;
-            flex-wrap: wrap;
         }
 
         .filter-btn {
-            padding: 0.5rem 1rem;
+            padding: 0.5rem;
             background: var(--light-gray);
             border: none;
             border-radius: 2rem;
             color: var(--medium-gray);
             cursor: pointer;
             transition: var(--transition);
+            font-size: 0.85rem;
         }
 
         .filter-btn.active {
@@ -1378,12 +1495,12 @@
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 2rem 1rem;
             color: var(--medium-gray);
         }
 
         .empty-state i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--light-pink);
         }
@@ -1435,6 +1552,7 @@
             align-items: center;
             gap: 0.5rem;
             margin-bottom: 0.25rem;
+            font-size: 0.8rem;
         }
 
         .requirement.met {
@@ -1459,7 +1577,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 1rem 1.5rem;
+            padding: 1rem;
             border-radius: 0.75rem;
             font-weight: 600;
             cursor: pointer;
@@ -1471,6 +1589,7 @@
             justify-content: center;
             margin-top: 1rem;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+            font-size: 1rem;
         }
 
         .developer-button:hover {
@@ -1485,7 +1604,7 @@
 
         .developer-details {
             background: var(--white);
-            padding: 1.5rem;
+            padding: 1.25rem;
             border-radius: var(--border-radius);
             margin-top: 1rem;
             box-shadow: var(--shadow);
@@ -1498,12 +1617,14 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .developer-details p {
             color: var(--medium-gray);
             margin-bottom: 0.75rem;
             font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         .developer-info {
@@ -1527,7 +1648,7 @@
 
         .developer-features {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 0.75rem;
             margin: 1rem 0;
         }
@@ -1552,130 +1673,207 @@
         .terms-acceptance-content h4 {
             color: var(--dark-gray);
             margin-bottom: 1rem;
+            font-size: 1.2rem;
         }
 
         .terms-acceptance-content ul {
             list-style-type: disc;
             margin-left: 1.5rem;
             color: var(--medium-gray);
+            padding-right: 0.5rem;
         }
 
         .terms-acceptance-content li {
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
+            line-height: 1.4;
         }
 
-        /* Mobile View Improvements */
-        @media (max-width: 1024px) {
-            .about-content, .contact-grid, .two-column-grid {
-                grid-template-columns: 1fr;
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .hero {
+                padding: 5rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .slogan-large {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1.25rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
                 gap: 2rem;
             }
-            
+
+            .two-column-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+            }
+
             .grid-image {
-                height: 300px;
+                height: 400px;
+                font-size: 4rem;
+                order: 1;
+            }
+
+            .grid-content {
+                order: 2;
+            }
+
+            .two-column-grid.reverse-mobile .grid-image {
+                order: 1;
+            }
+
+            .two-column-grid.reverse-mobile .grid-content {
+                order: 2;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+            }
+
+            .orders-filter {
+                grid-template-columns: repeat(4, auto);
+                gap: 0.5rem;
+            }
+
+            .account-menu {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            .form-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .order-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .order-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .notifications-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .share-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .developer-features {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             .header-container {
                 padding: 1rem;
             }
 
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--white);
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: var(--shadow);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .slogan-large {
-                font-size: 1.5rem;
+            .logo-text {
+                font-size: 1.25rem;
             }
 
             .slogan {
                 display: none;
             }
 
-            .section-title {
-                font-size: 2rem;
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+                display: none;
+                z-index: 999;
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                text-align: center;
+                width: 100%;
+                border-radius: 0.75rem;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Hide search input on mobile, show only icon */
+            #searchInput {
+                display: none;
+            }
+
+            .search-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .search-mobile.active {
+                display: block;
             }
 
             .hero-buttons {
                 flex-direction: column;
-                align-items: center;
+                align-items: stretch;
             }
 
             .btn {
                 width: 100%;
-                max-width: 300px;
-                justify-content: center;
             }
 
-            .order-actions {
-                flex-direction: column;
+            .services {
+                padding: 3rem 1rem;
             }
 
-            .order-actions button {
-                width: 100%;
-                margin-left: 0;
-                margin-top: 0.5rem;
+            .grid-content h3 {
+                font-size: 1.5rem;
             }
 
-            .form-actions {
-                flex-direction: column;
+            .grid-content p {
+                font-size: 1rem;
             }
 
-            .orders-filter {
-                flex-direction: column;
+            .modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
             }
 
-            .account-menu {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                gap: 0.5rem;
+            .terms-content {
+                padding: 1.5rem;
             }
-            
-            .account-menu-item {
-                min-width: 70px;
-                padding: 0.5rem;
-                flex-direction: column;
-            }
-            
-            .account-menu-item i {
-                font-size: 1.25rem;
-                margin-bottom: 0.25rem;
-            }
-            
+
             .account-menu-item span {
                 font-size: 0.7rem;
-                display: none;
-            }
-            
-            .account-menu-item.active span {
-                display: block;
-            }
-            
-            .developer-features {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -1688,31 +1886,394 @@
                 font-size: 1.2rem;
             }
 
-            .hero p, .section-subtitle {
+            .hero p {
                 font-size: 1rem;
             }
 
+            .section-title {
+                font-size: 2rem;
+            }
+
             .service-card {
-                padding: 1.5rem;
+                padding: 1.25rem;
+            }
+
+            .service-name {
+                font-size: 1.3rem;
             }
 
             .modal-content {
-                padding: 1.5rem;
-            }
-
-            .terms-content {
-                padding: 1.5rem;
+                padding: 1.25rem;
             }
 
             .account-menu-item {
-                min-width: 60px;
-                padding: 0.4rem;
+                padding: 0.5rem;
+                min-height: 60px;
             }
-            
-            .account-menu-item.active {
-                min-width: 80px;
+
+            .account-menu-item i {
+                font-size: 1rem;
+            }
+
+            .profile-picture {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+
+            .whatsapp-float {
+                width: 3rem;
+                height: 3rem;
+                font-size: 1.25rem;
+                bottom: 1rem;
+                right: 1rem;
             }
         }
+
+        /* Enhanced Scroll Animations for Mobile */
+        @media (max-width: 767px) {
+            .two-column-grid .reveal {
+                animation-duration: 0.6s;
+                animation-fill-mode: both;
+            }
+
+            .grid-image.reveal {
+                animation-delay: 0.2s;
+            }
+
+            .grid-content.reveal {
+                animation-delay: 0.4s;
+            }
+
+            .two-column-grid.reverse-mobile .grid-image.reveal {
+                animation-delay: 0.4s;
+            }
+
+            .two-column-grid.reverse-mobile .grid-content.reveal {
+                animation-delay: 0.2s;
+            }
+        }
+        /* Add to your existing CSS */
+
+/* 1. Dark Mode Receipt Styles */
+.dark-theme .receipt {
+    background: #1f2937;
+    color: #f9fafb;
+}
+
+.dark-theme .receipt-header h3 {
+    color: var(--primary-pink);
+}
+
+.dark-theme .receipt-header p {
+    color: #d1d5db;
+}
+
+.dark-theme .receipt-item {
+    border-bottom: 1px dashed #4b5563;
+    color: #e5e7eb;
+}
+
+.dark-theme .receipt-total {
+    border-top: 2px dashed #4b5563;
+    color: #f9fafb;
+}
+
+.dark-theme .receipt-footer {
+    color: #9ca3af;
+    border-top: 1px solid #4b5563;
+}
+
+.dark-theme .receipt-footer p {
+    color: #9ca3af;
+}
+
+/* 2. Better Terms & Conditions Styling */
+.terms-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.terms-content h3 {
+    font-size: 1.8rem;
+    color: var(--dark-gray);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-pink);
+}
+
+.terms-content h4 {
+    font-size: 1.3rem;
+    color: var(--primary-pink);
+    margin: 2rem 0 1rem;
+    padding-left: 0.5rem;
+    border-left: 4px solid var(--primary-pink);
+    padding-left: 1rem;
+}
+
+.terms-content p {
+    color: var(--medium-gray);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.terms-content ul {
+    list-style: none;
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.terms-content li {
+    color: var(--medium-gray);
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.terms-content li:before {
+    content: "•";
+    color: var(--primary-pink);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: -0.2rem;
+}
+
+.terms-content > p:last-child {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--light-gray);
+    font-style: italic;
+    color: var(--medium-gray);
+    font-size: 0.9rem;
+}
+
+/* Dark Mode Terms & Conditions */
+.dark-theme .terms-content {
+    background: var(--white);
+}
+
+.dark-theme .terms-content h3 {
+    color: var(--dark-gray);
+    border-bottom: 2px solid rgba(236, 72, 153, 0.2);
+}
+
+.dark-theme .terms-content h4 {
+    color: var(--primary-pink);
+    border-left: 4px solid var(--primary-pink);
+}
+
+.dark-theme .terms-content p {
+    color: var(--medium-gray);
+}
+
+.dark-theme .terms-content li {
+    color: var(--medium-gray);
+}
+
+.dark-theme .terms-content li:before {
+    color: var(--primary-pink);
+}
+
+.dark-theme .terms-content > p:last-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* 3. Dark Mode Social Media Icons */
+.dark-theme .social-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+}
+
+.dark-theme .social-link:hover {
+    background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Make social icons brighter in dark mode */
+.dark-theme .social-link i {
+    color: var(--white);
+}
+
+/* 4. Dark Mode Footer Titles */
+.dark-theme .footer-column h3 {
+    color: var(--white);
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.dark-theme .footer-column h3:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+}
+
+/* Dark mode newsletter form improvements */
+.dark-theme .newsletter-form input {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark-theme .newsletter-form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.dark-theme .newsletter-form .btn-primary {
+    background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+    color: var(--white);
+}
+
+/* Dark mode footer links hover effect */
+.dark-theme .footer-links a:hover {
+    color: var(--primary-pink);
+    transform: translateX(5px);
+    display: inline-block;
+}
+
+/* Dark mode developer button adjustments */
+.dark-theme .developer-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.dark-theme .developer-button:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.dark-theme .developer-details {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-left: 4px solid #667eea;
+}
+
+.dark-theme .developer-details h4 {
+    color: var(--white);
+}
+
+.dark-theme .developer-details p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dark-theme .developer-feature {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 5. Enhanced Dark Mode General Improvements */
+.dark-theme .modal-content {
+    background-color: #1f2937;
+    color: #f9fafb;
+}
+
+.dark-theme .modal-title {
+    color: #f9fafb;
+}
+
+.dark-theme .form-group label {
+    color: #f9fafb;
+}
+
+.dark-theme .form-group input,
+.dark-theme .form-group select,
+.dark-theme .form-group textarea {
+    background-color: #374151;
+    color: #f9fafb;
+    border-color: #4b5563;
+}
+
+.dark-theme .form-group input:focus,
+.dark-theme .form-group select:focus,
+.dark-theme .form-group textarea:focus {
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+}
+
+.dark-theme .radio-option label {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #d1d5db;
+}
+
+.dark-theme .radio-option input:checked + label {
+    background-color: rgba(236, 72, 153, 0.2);
+    border-color: var(--primary-pink);
+    color: var(--primary-pink);
+}
+
+/* Dark mode account modal improvements */
+.dark-theme .account-modal-content {
+    background-color: #1f2937;
+}
+
+.dark-theme .account-menu-item {
+    background-color: #374151;
+    color: #d1d5db;
+}
+
+.dark-theme .account-menu-item.active {
+    background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+    color: var(--white);
+}
+
+/* Dark mode service cards */
+.dark-theme .service-card {
+    background-color: #1f2937;
+    color: #f9fafb;
+}
+
+.dark-theme .service-name {
+    color: #f9fafb;
+}
+
+.dark-theme .service-description {
+    color: #d1d5db;
+}
+
+.dark-theme .service-duration {
+    color: #9ca3af;
+}
+
+/* Dark mode contact items */
+.dark-theme .contact-text h4 {
+    color: #f9fafb;
+}
+
+.dark-theme .contact-text p {
+    color: #d1d5db;
+}
+
+/* Responsive adjustments for dark mode */
+@media (max-width: 767px) {
+    .terms-content {
+        padding: 1.5rem;
+    }
+    
+    .terms-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .terms-content h4 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Add smooth transitions for dark mode changes */
+.service-card, .footer-column, .contact-item, .modal-content, 
+.account-menu-item, .terms-content {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
     </style>
 </head>
 <body>
@@ -1739,8 +2300,9 @@
                 </ul>
 
                 <div class="header-controls">
+                    <!-- Mobile Search Icon -->
                     <div class="search-container">
-                        <i class="fas fa-search search-icon"></i>
+                        <i class="fas fa-search search-icon" id="mobileSearchIcon"></i>
                         <input type="text" id="searchInput" placeholder="Search services...">
                     </div>
                     <button class="theme-toggle" id="themeToggle">
@@ -1756,6 +2318,11 @@
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
+        </div>
+
+        <!-- Mobile Search Bar -->
+        <div class="search-mobile" id="searchMobile">
+            <input type="text" class="search-mobile-input" placeholder="Search for nail services...">
         </div>
     </header>
 
@@ -1799,7 +2366,7 @@
             </div>
         </div>
 
-        <div class="two-column-grid">
+        <div class="two-column-grid reverse-mobile">
             <div class="grid-content reveal">
                 <h3>Premium Home Services</h3>
                 <p>Can't make it to our studio? We bring luxury nail care to your doorstep. Our mobile team is equipped with everything needed to provide a salon-quality experience in the comfort of your home.</p>
@@ -1897,154 +2464,179 @@
     </section>
 
     <!-- Terms & Conditions Section -->
-    <section class="terms-section reveal" id="terms">
-        <h2 class="section-title">Terms & Conditions</h2>
-        <p class="section-subtitle">Please read our terms carefully</p>
+   <!-- Replace the existing Terms & Conditions Section with this improved version -->
+<section class="terms-section reveal" id="terms">
+    <h2 class="section-title">Terms & Conditions</h2>
+    <p class="section-subtitle">Please read our terms carefully before booking</p>
+    
+    <div class="terms-content">
+        <h3>Terms of Service</h3>
+        <p>Welcome to Maria Nail Art Studio. By using our services, you agree to these terms and conditions. We reserve the right to modify these terms at any time, so please review them periodically.</p>
         
-        <div class="terms-content">
-            <h3>Terms of Service</h3>
-            <p>Welcome to Maria Nail Art Studio. By using our services, you agree to these terms and conditions.</p>
-            
-            <h4>1. Booking and Appointments</h4>
-            <ul>
-                <li>All appointments require a confirmation call or message</li>
-                <li>Please arrive 10 minutes before your scheduled appointment</li>
-                <li>Late arrivals may result in shortened service time</li>
-                <li>Cancellations must be made at least 24 hours in advance</li>
-            </ul>
-            
-            <h4>2. Payment Terms</h4>
-            <ul>
-                <li>All services must be paid for at the time of service</li>
-                <li>We accept cash, M-Pesa, and credit/debit cards</li>
-                <li>Home services require 50% deposit upon booking</li>
-                <li>Prices are subject to change without notice</li>
-            </ul>
-            
-            <h4>3. Service Guarantee</h4>
-            <ul>
-                <li>We guarantee all our work for 7 days from service date</li>
-                <li>Any issues must be reported within 24 hours</li>
-                <li>We are not responsible for allergic reactions to products</li>
-                <li>Patch tests available upon request</li>
-            </ul>
-            
-            <h4>4. Health and Safety</h4>
-            <ul>
-                <li>All tools are sterilized after each use</li>
-                <li>Please inform us of any medical conditions or allergies</li>
-                <li>We reserve the right to refuse service for health reasons</li>
-                <li>Sanitation and hygiene are our top priority</li>
-            </ul>
-            
-            <h4>5. Home Services</h4>
-            <ul>
-                <li>Available within Nairobi County only</li>
-                <li>Additional travel charges may apply for distant locations</li>
-                <li>Client must provide adequate workspace and lighting</li>
-                <li>Pets should be secured during service</li>
-            </ul>
-            
-            <p>Last updated: 21 January 2026</p>
-        </div>
-    </section>
-
+        <h4>1. Booking and Appointments</h4>
+        <ul>
+            <li>All appointments require a confirmation call or message</li>
+            <li>Please arrive 10 minutes before your scheduled appointment</li>
+            <li>Late arrivals may result in shortened service time</li>
+            <li>Cancellations must be made at least 24 hours in advance</li>
+            <li>No-shows will result in a 50% charge of the service fee</li>
+        </ul>
+        
+        <h4>2. Payment Terms</h4>
+        <ul>
+            <li>All services must be paid for at the time of service</li>
+            <li>We accept cash, M-Pesa, and credit/debit cards</li>
+            <li>Home services require 50% deposit upon booking</li>
+            <li>Prices are subject to change without notice</li>
+            <li>Refunds are processed within 5-7 business days</li>
+        </ul>
+        
+        <h4>3. Service Guarantee</h4>
+        <ul>
+            <li>We guarantee all our work for 7 days from service date</li>
+            <li>Any issues must be reported within 24 hours</li>
+            <li>We are not responsible for allergic reactions to products</li>
+            <li>Patch tests are available upon request at no charge</li>
+            <li>Damages due to client negligence are not covered</li>
+        </ul>
+        
+        <h4>4. Health and Safety</h4>
+        <ul>
+            <li>All tools are sterilized after each use</li>
+            <li>Please inform us of any medical conditions or allergies</li>
+            <li>We reserve the right to refuse service for health reasons</li>
+            <li>Sanitation and hygiene are our top priority</li>
+            <li>COVID-19 safety protocols are strictly followed</li>
+        </ul>
+        
+        <h4>5. Home Services</h4>
+        <ul>
+            <li>Available within Nairobi County only</li>
+            <li>Additional travel charges may apply for distant locations</li>
+            <li>Client must provide adequate workspace and lighting</li>
+            <li>Pets should be secured during service</li>
+            <li>Parking availability must be confirmed in advance</li>
+        </ul>
+        
+        <h4>6. Privacy Policy</h4>
+        <ul>
+            <li>Your personal information is kept confidential</li>
+            <li>We do not share client information with third parties</li>
+            <li>Photos may be taken for portfolio with client consent</li>
+            <li>You can request data deletion at any time</li>
+        </ul>
+        
+        <p>By booking our services, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions.</p>
+        
+        <p>Last updated: 21 January 2026</p>
+    </div>
+</section>
     <!-- Footer -->
-    <footer class="reveal">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Maria Nail Art Studio</h3>
-                <p>Premium nail care services in Nairobi, Kenya. Experience luxury and professionalism at our studio or in the comfort of your home.</p>
-                <div class="social-links">
-                    <a href="https://wa.me/254741148601" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.instagram.com/litemaria.nailartstudio?igsh=ZXUwb3diMDgxOHZw" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#terms">Terms & Conditions</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Our Services</h3>
-                <ul class="footer-links">
-                    <li><a href="#services">Nail Treatments</a></li>
-                    <li><a href="#services">Manicure & Pedicure</a></li>
-                    <li><a href="#services">Nail Art</a></li>
-                    <li><a href="#services">Home Services</a></li>
-                    <li><a href="#services">Nail Repair</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Newsletter & Support</h3>
-                <p>Subscribe to get updates on offers and new services</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Your email address" required>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
-                
-                <!-- Improved Developer button -->
-                <button class="developer-button" id="contactDeveloperBtn">
-                    <i class="fas fa-code"></i> Contact Developer
-                </button>
-                
-                <!-- Developer Details -->
-                <div class="developer-details" id="developerDetails" style="display: none;">
-                    <div class="developer-info">
-                        <div class="developer-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <div>
-                            <h4>Website Developer</h4>
-                            <p>Custom web solutions for businesses</p>
-                        </div>
-                    </div>
-                    
-                    <div class="developer-features">
-                        <div class="developer-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Professional Web Development</span>
-                        </div>
-                        <div class="developer-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Responsive Mobile Design</span>
-                        </div>
-                        <div class="developer-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>E-commerce Solutions</span>
-                        </div>
-                        <div class="developer-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Booking System Integration</span>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 1rem;">
-                        <button class="btn btn-outline btn-small" id="whatsappDeveloperBtn" style="width: 100%;">
-                            <i class="fab fa-whatsapp"></i> WhatsApp Developer
-                        </button>
-                    </div>
-                </div>
+    <!-- Replace the existing footer section with this improved version -->
+<footer class="reveal">
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>Maria Nail Art Studio</h3>
+            <p>Premium nail care services in Nairobi, Kenya. Experience luxury and professionalism at our studio or in the comfort of your home.</p>
+            <div class="social-links">
+                <a href="https://wa.me/254741148601" class="social-link" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/litemaria.nailartstudio?igsh=ZXUwb3diMDgxOHZw" class="social-link" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-link" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="mailto:info@marianailstudio.co.ke" class="social-link" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
         </div>
         
-        <div class="footer-bottom">
-            <p>&copy; 2026 Maria Nail Art Studio. All rights reserved. | Nairobi, Kenya</p>
-            <p>Designed with <i class="fas fa-heart" style="color: var(--primary-pink);"></i> for nail care enthusiasts</p>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#terms">Terms & Conditions</a></li>
+            </ul>
         </div>
-    </footer>
+        
+        <div class="footer-column">
+            <h3>Our Services</h3>
+            <ul class="footer-links">
+                <li><a href="#services">Nail Treatments</a></li>
+                <li><a href="#services">Manicure & Pedicure</a></li>
+                <li><a href="#services">Nail Art Design</a></li>
+                <li><a href="#services">Home Services</a></li>
+                <li><a href="#services">Nail Repair</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Newsletter & Support</h3>
+            <p>Subscribe to get updates on offers and new services</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+            
+            <button class="developer-button" id="contactDeveloperBtn">
+                <i class="fas fa-code"></i> Contact Developer
+            </button>
+            
+            <div class="developer-details" id="developerDetails" style="display: none;">
+                <div class="developer-info">
+                    <div class="developer-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <h4>Website Developer</h4>
+                        <p>Custom web solutions for businesses</p>
+                    </div>
+                </div>
+                
+                <div class="developer-features">
+                    <div class="developer-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Professional Web Development</span>
+                    </div>
+                    <div class="developer-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Responsive Mobile Design</span>
+                    </div>
+                    <div class="developer-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>E-commerce Solutions</span>
+                    </div>
+                    <div class="developer-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Booking System Integration</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 1rem;">
+                    <button class="btn btn-outline btn-small" id="whatsappDeveloperBtn" style="width: 100%;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Developer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2026 Maria Nail Art Studio. All rights reserved. | Nairobi, Kenya</p>
+        <p>Designed with <i class="fas fa-heart" style="color: var(--primary-pink);"></i> for nail care enthusiasts</p>
+    </div>
+</footer>
 
     <!-- Booking Modal -->
     <div class="modal" id="bookingModal">
@@ -2550,79 +3142,6 @@
             }
         ];
 
-        // Default users
-        const defaultUsers = {
-            "254741148601": {
-                phone: "+254 741 148 601",
-                password: "nail123",
-                name: "Jane Doe",
-                email: "jane@example.com",
-                address: "123 Westlands, Nairobi",
-                visits: 5,
-                totalSpent: 8200,
-                profilePicture: null,
-                isGuest: false
-            },
-            "254741148602": {
-                phone: "+254 741 148 602",
-                password: "nail123",
-                name: "John Smith",
-                email: "john@example.com",
-                address: "456 Karen, Nairobi",
-                visits: 3,
-                totalSpent: 4500,
-                profilePicture: null,
-                isGuest: false
-            }
-        };
-
-        // Current user data
-        let currentUser = null;
-
-        // Sample notifications data
-        const sampleNotifications = [
-            {
-                id: 1,
-                title: "Welcome to Maria Nail Studio!",
-                message: "Thank you for joining us. Get 10% off your first booking with code WELCOME10",
-                type: "promotion",
-                time: new Date(Date.now() - 3600000).toISOString(),
-                read: false
-            },
-            {
-                id: 2,
-                title: "Appointment Confirmed",
-                message: "Your gel nails appointment for tomorrow at 2:00 PM has been confirmed",
-                type: "success",
-                time: new Date(Date.now() - 7200000).toISOString(),
-                read: false
-            },
-            {
-                id: 3,
-                title: "Special Offer",
-                message: "This weekend only: 20% off all pedicure services",
-                type: "promotion",
-                time: new Date(Date.now() - 86400000).toISOString(),
-                read: true
-            },
-            {
-                id: 4,
-                title: "New Service Available",
-                message: "Try our new luxury spa manicure with hot stone massage",
-                type: "info",
-                time: new Date(Date.now() - 172800000).toISOString(),
-                read: true
-            },
-            {
-                id: 5,
-                title: "Reminder",
-                message: "Your next appointment is in 2 days. Please confirm your availability",
-                type: "warning",
-                time: new Date(Date.now() - 259200000).toISOString(),
-                read: true
-            }
-        ];
-
         // DOM Elements
         const themeToggle = document.getElementById('themeToggle');
         const searchInput = document.getElementById('searchInput');
@@ -2679,12 +3198,125 @@
         const closeTermsModal = document.getElementById('closeTermsModal');
         const acceptTermsCheckbox = document.getElementById('acceptTerms');
         const confirmTermsBtn = document.getElementById('confirmTermsBtn');
+        const mobileSearchIcon = document.getElementById('mobileSearchIcon');
+        const searchMobile = document.getElementById('searchMobile');
+        const searchMobileInput = document.querySelector('.search-mobile-input');
 
+        // Current user data
+        let currentUser = null;
         // Website URL
         const WEBSITE_URL = "https://darius2322.github.io/mariah-nails/";
 
+        // Generate unique device ID
+        function getDeviceId() {
+            let deviceId = localStorage.getItem('deviceId');
+            if (!deviceId) {
+                deviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('deviceId', deviceId);
+            }
+            return deviceId;
+        }
+
+        // Generate fresh data for new device
+        function generateFreshUserData(deviceId) {
+            const userNames = ["Alex Mwangi", "Sarah Wanjiru", "David Ochieng", "Grace Akinyi", "Michael Kamau"];
+            const userEmails = ["alex@email.com", "sarah@email.com", "david@email.com", "grace@email.com", "michael@email.com"];
+            const addresses = ["Kilimani, Nairobi", "Westlands, Nairobi", "Karen, Nairobi", "Lavington, Nairobi", "Runda, Nairobi"];
+            
+            const randomIndex = Math.floor(Math.random() * userNames.length);
+            
+            return {
+                phone: `+2547${Math.floor(Math.random() * 90000000 + 10000000)}`,
+                password: "nail123",
+                name: userNames[randomIndex],
+                email: userEmails[randomIndex],
+                address: addresses[randomIndex],
+                visits: 1,
+                totalSpent: 0,
+                profilePicture: null,
+                isGuest: false,
+                deviceId: deviceId
+            };
+        }
+
+        // Generate fresh notifications for new device
+        function generateFreshNotifications() {
+            return [
+                {
+                    id: Date.now().toString(),
+                    title: "Welcome to Maria Nail Studio!",
+                    message: "Welcome to our premium nail care services. Enjoy your first visit with 10% off your first booking using code WELCOME10",
+                    type: "promotion",
+                    time: new Date().toISOString(),
+                    read: false
+                },
+                {
+                    id: (Date.now() + 1).toString(),
+                    title: "New Services Available",
+                    message: "Check out our new luxury spa treatments and nail art designs. Book now to experience premium nail care.",
+                    type: "info",
+                    time: new Date(Date.now() - 86400000).toISOString(),
+                    read: false
+                },
+                {
+                    id: (Date.now() + 2).toString(),
+                    title: "Weekend Special",
+                    message: "Enjoy 15% off all pedicure services this weekend. Limited slots available, book now!",
+                    type: "promotion",
+                    time: new Date(Date.now() - 172800000).toISOString(),
+                    read: true
+                }
+            ];
+        }
+
+        // Generate fresh orders for new device
+        function generateFreshOrders() {
+            const serviceNames = ["Classic Manicure", "Deluxe Pedicure", "Gel Nails", "Nail Art Design"];
+            const randomService = serviceNames[Math.floor(Math.random() * serviceNames.length)];
+            const price = services.find(s => s.name === randomService)?.price || 1000;
+            
+            return [
+                {
+                    id: "ORD-" + Math.floor(Math.random() * 900000 + 100000),
+                    service: randomService,
+                    date: new Date(Date.now() - 86400000 * Math.floor(Math.random() * 30)).toISOString().split('T')[0],
+                    price: price,
+                    status: Math.random() > 0.5 ? "completed" : "pending",
+                    items: [{ name: randomService, price: price }],
+                    location: Math.random() > 0.5 ? "At Studio" : "Home Service",
+                    time: ["09:00", "11:00", "14:00", "16:00"][Math.floor(Math.random() * 4)]
+                }
+            ];
+        }
+
+        // Check if device is new and generate fresh data
+        function checkDeviceAndGenerateData() {
+            const deviceId = getDeviceId();
+            const storedDeviceId = localStorage.getItem('lastDeviceId');
+            
+            if (storedDeviceId !== deviceId) {
+                // New device detected - generate fresh data
+                localStorage.setItem('lastDeviceId', deviceId);
+                
+                // Generate fresh user data
+                const freshUser = generateFreshUserData(deviceId);
+                localStorage.setItem('userData', JSON.stringify(freshUser));
+                
+                // Generate fresh notifications
+                localStorage.setItem('userNotifications', JSON.stringify(generateFreshNotifications()));
+                
+                // Generate fresh orders
+                localStorage.setItem('userOrders', JSON.stringify(generateFreshOrders()));
+                
+                console.log("Fresh data generated for new device");
+            }
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            // Check device and generate fresh data if needed
+            checkDeviceAndGenerateData();
+            
             initializeServices();
             setMinBookingDate();
             setupEventListeners();
@@ -2794,9 +3426,9 @@
         function updateNotificationBadge(notifications) {
             const unreadCount = notifications.filter(n => !n.read).length;
             if (unreadCount > 0) {
-                notificationBadge.textContent = unreadCount;
+                notificationBadge.textContent = unreadCount > 9 ? '9+' : unreadCount;
                 notificationBadge.style.display = 'flex';
-                menuNotificationBadge.textContent = unreadCount;
+                menuNotificationBadge.textContent = unreadCount > 9 ? '9+' : unreadCount;
                 menuNotificationBadge.style.display = 'flex';
             } else {
                 notificationBadge.style.display = 'none';
@@ -3035,7 +3667,7 @@
             bookingDateInput.value = formattedDate;
         }
 
-        // Setup scroll reveal
+        // Setup scroll reveal with enhanced mobile animations
         function setupScrollReveal() {
             const reveals = document.querySelectorAll('.reveal');
             
@@ -3043,7 +3675,7 @@
                 reveals.forEach(element => {
                     const windowHeight = window.innerHeight;
                     const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 150;
+                    const elementVisible = 100;
                     
                     if (elementTop < windowHeight - elementVisible) {
                         element.classList.add('active');
@@ -3053,6 +3685,20 @@
             
             revealOnScroll();
             window.addEventListener('scroll', revealOnScroll);
+            
+            // Add specific animation delays for 2-column grid on mobile
+            if (window.innerWidth <= 767) {
+                const gridImages = document.querySelectorAll('.grid-image.reveal');
+                const gridContents = document.querySelectorAll('.grid-content.reveal');
+                
+                gridImages.forEach((img, index) => {
+                    img.style.animationDelay = `${0.2 + (index * 0.2)}s`;
+                });
+                
+                gridContents.forEach((content, index) => {
+                    content.style.animationDelay = `${0.3 + (index * 0.2)}s`;
+                });
+            }
         }
 
         // Setup event listeners
@@ -3062,16 +3708,38 @@
             
             // Search functionality
             searchInput.addEventListener('input', filterServices);
+            searchMobileInput.addEventListener('input', filterServices);
+            
+            // Mobile search icon toggle
+            mobileSearchIcon.addEventListener('click', () => {
+                searchMobile.classList.toggle('active');
+                mobileSearchIcon.classList.toggle('active');
+                if (searchMobile.classList.contains('active')) {
+                    searchMobileInput.focus();
+                }
+            });
+            
+            // Close mobile search when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!searchMobile.contains(e.target) && !mobileSearchIcon.contains(e.target)) {
+                    searchMobile.classList.remove('active');
+                    mobileSearchIcon.classList.remove('active');
+                }
+            });
             
             // Mobile menu toggle
             mobileMenuBtn.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
+                searchMobile.classList.remove('active');
+                mobileSearchIcon.classList.remove('active');
             });
             
             // Account button
             accountBtn.addEventListener('click', () => {
                 accountModal.style.display = 'flex';
                 navLinks.classList.remove('active');
+                searchMobile.classList.remove('active');
+                mobileSearchIcon.classList.remove('active');
                 updateNotificationBadge(getUserNotifications());
                 
                 // Show appropriate section based on login status
@@ -3236,6 +3904,23 @@
                     }
                 }
             });
+            
+            // Responsive search input behavior
+            window.addEventListener('resize', handleResize);
+            handleResize(); // Initial call
+        }
+
+        // Handle window resize for search input
+        function handleResize() {
+            if (window.innerWidth <= 767) {
+                searchInput.style.display = 'none';
+                mobileSearchIcon.style.display = 'flex';
+            } else {
+                searchInput.style.display = 'block';
+                mobileSearchIcon.style.display = 'none';
+                searchMobile.classList.remove('active');
+                mobileSearchIcon.classList.remove('active');
+            }
         }
 
         // Setup order button listeners
@@ -3310,20 +3995,9 @@
         function getUserOrders() {
             const orders = localStorage.getItem('userOrders');
             if (!orders) {
-                const sampleOrders = [
-                    {
-                        id: "ORD-001",
-                        service: "Gel Nails",
-                        date: new Date(Date.now() - 86400000 * 7).toISOString().split('T')[0],
-                        price: 1500,
-                        status: "completed",
-                        items: [{ name: "Gel Nails", price: 1500 }],
-                        location: "At Studio",
-                        time: "14:00"
-                    }
-                ];
-                saveUserOrders(sampleOrders);
-                return sampleOrders;
+                const freshOrders = generateFreshOrders();
+                saveUserOrders(freshOrders);
+                return freshOrders;
             }
             return JSON.parse(orders);
         }
@@ -3337,8 +4011,9 @@
         function getUserNotifications() {
             const notifications = localStorage.getItem('userNotifications');
             if (!notifications) {
-                saveUserNotifications(sampleNotifications);
-                return sampleNotifications;
+                const freshNotifications = generateFreshNotifications();
+                saveUserNotifications(freshNotifications);
+                return freshNotifications;
             }
             return JSON.parse(notifications);
         }
@@ -3451,6 +4126,29 @@
             document.getElementById('editAddress').value = currentUser.address || '';
         }
 
+        // Filter services based on search
+        function filterServices() {
+            const searchTerm = searchInput.value.toLowerCase() || searchMobileInput.value.toLowerCase();
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            serviceCards.forEach(card => {
+                const serviceName = card.querySelector('.service-name').textContent.toLowerCase();
+                const serviceDesc = card.querySelector('.service-description').textContent.toLowerCase();
+                
+                if (serviceName.includes(searchTerm) || serviceDesc.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Close mobile search if open
+            if (window.innerWidth <= 767 && searchTerm) {
+                searchMobile.classList.remove('active');
+                mobileSearchIcon.classList.remove('active');
+            }
+        }
+
         // Check password strength
         function checkPasswordStrength() {
             const password = document.getElementById('newPassword').value;
@@ -3502,12 +4200,15 @@
             const normalizedPhone = phone.replace(/\D/g, '');
             let user = null;
             
-            if (defaultUsers[normalizedPhone]) {
-                user = defaultUsers[normalizedPhone];
+            // Check stored users first
+            const storedUsers = JSON.parse(localStorage.getItem('storedUsers') || '{}');
+            if (storedUsers[normalizedPhone]) {
+                user = storedUsers[normalizedPhone];
             } else {
-                const storedUsers = JSON.parse(localStorage.getItem('storedUsers') || '{}');
-                if (storedUsers[normalizedPhone]) {
-                    user = storedUsers[normalizedPhone];
+                // Check current user data
+                const currentUserData = getUserData();
+                if (currentUserData && currentUserData.phone === normalizedPhone) {
+                    user = currentUserData;
                 }
             }
             
@@ -3539,8 +4240,9 @@
 
         // Handle guest login
         function handleGuestLogin() {
+            const deviceId = getDeviceId();
             currentUser = {
-                phone: `guest_${Date.now()}`,
+                phone: `guest_${deviceId}`,
                 name: "Guest User",
                 email: "",
                 address: "",
@@ -3717,23 +4419,6 @@
             }
         }
 
-        // Filter services based on search
-        function filterServices() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const serviceCards = document.querySelectorAll('.service-card');
-            
-            serviceCards.forEach(card => {
-                const serviceName = card.querySelector('.service-name').textContent.toLowerCase();
-                const serviceDesc = card.querySelector('.service-description').textContent.toLowerCase();
-                
-                if (serviceName.includes(searchTerm) || serviceDesc.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
         // Open booking modal with service details
         function openBookingModal(serviceId) {
             const service = services.find(s => s.id === serviceId);
@@ -3743,6 +4428,15 @@
             document.getElementById('bookingServiceName').value = service.name;
             document.getElementById('bookingServicePrice').value = service.price;
             document.getElementById('bookingServiceId').value = service.id;
+            
+            // Pre-fill with current user data if logged in
+            if (currentUser) {
+                document.getElementById('bookingName').value = currentUser.name;
+                document.getElementById('bookingPhone').value = currentUser.phone;
+                if (currentUser.address) {
+                    document.getElementById('homeAddress').value = currentUser.address;
+                }
+            }
             
             bookingModal.style.display = 'flex';
         }
@@ -3827,7 +4521,7 @@
                     address: document.querySelector('input[name="location"]:checked').value === 'home' 
                         ? document.getElementById('homeAddress').value 
                         : ''
-            };
+                };
             }
             
             const bookingDate = new Date(bookingData.date);
