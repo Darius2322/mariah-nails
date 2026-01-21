@@ -1,0 +1,4240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria Nail Art Studio | Luxury Nail Care in Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- QR Code Generator Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-pink: #ec4899;
+            --primary-purple: #8b5cf6;
+            --light-pink: #fce7f3;
+            --light-purple: #f5f3ff;
+            --dark-gray: #374151;
+            --medium-gray: #6b7280;
+            --light-gray: #f9fafb;
+            --white: #ffffff;
+            --success-green: #10b981;
+            --whatsapp-green: #25D366;
+            --warning-yellow: #f59e0b;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 1rem;
+            --transition: all 0.3s ease;
+        }
+
+        .dark-theme {
+            --primary-pink: #ec4899;
+            --primary-purple: #8b5cf6;
+            --light-pink: #1f2937;
+            --light-purple: #111827;
+            --dark-gray: #f9fafb;
+            --medium-gray: #d1d5db;
+            --light-gray: #374151;
+            --white: #1f2937;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Dark theme specific footer styles */
+        .dark-theme footer {
+            background-color: #111827;
+            color: #f9fafb;
+        }
+
+        .dark-theme .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .dark-theme .footer-links a:hover {
+            color: var(--primary-pink);
+        }
+
+        .dark-theme .footer-bottom {
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-theme .newsletter-form input {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .dark-theme .social-link {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .dark-theme .social-link:hover {
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-purple) 100%);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .slogan {
+            font-size: 0.9rem;
+            color: var(--primary-pink);
+            font-weight: 500;
+            margin-left: 1rem;
+            font-style: italic;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background-color: var(--light-pink);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        #searchInput {
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid var(--medium-gray);
+            border-radius: 2rem;
+            background-color: var(--white);
+            color: var(--dark-gray);
+            width: 200px;
+            transition: var(--transition);
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+            width: 250px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--medium-gray);
+        }
+
+        .theme-toggle, .account-btn, .cart-btn {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover, .account-btn:hover, .cart-btn:hover {
+            background-color: var(--light-pink);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .slogan-large {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-pink);
+            margin-bottom: 2rem;
+            font-style: italic;
+            background: linear-gradient(45deg, var(--primary-pink), var(--primary-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--medium-gray);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-pink);
+            border: 2px solid var(--primary-pink);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(236, 72, 153, 0.1);
+        }
+
+        .btn-success {
+            background-color: var(--success-green);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background-color: #0da271;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-pink);
+            border: 2px solid var(--primary-pink);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(236, 72, 153, 0.1);
+        }
+
+        .btn-warning {
+            background-color: var(--warning-yellow);
+            color: var(--white);
+        }
+
+        .btn-warning:hover {
+            background-color: #d97706;
+            transform: translateY(-2px);
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+        }
+
+        .services, .about, .contact-section, .terms-section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Two Column Grid Layout */
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .grid-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 4rem;
+        }
+
+        .grid-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .grid-content p {
+            margin-bottom: 1.5rem;
+            color: var(--medium-gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .service-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-description {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-pink);
+        }
+
+        .service-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--medium-gray);
+        }
+
+        .service-btn {
+            width: 100%;
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2);
+            animation: modalAppear 0.3s ease-out;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--medium-gray);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background-color: var(--light-pink);
+            color: var(--primary-pink);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--medium-gray);
+            border-radius: 0.5rem;
+            background-color: var(--white);
+            color: var(--dark-gray);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-option label {
+            display: block;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--medium-gray);
+            border-radius: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .radio-option input:checked + label {
+            border-color: var(--primary-pink);
+            background-color: rgba(236, 72, 153, 0.1);
+            color: var(--primary-pink);
+        }
+
+        /* Account Menu */
+        .account-menu {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .account-menu-item {
+            padding: 0.75rem 1rem;
+            background: var(--light-gray);
+            border-radius: 0.5rem;
+            border: none;
+            text-align: center;
+            color: var(--dark-gray);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            flex: 1;
+            min-width: 100px;
+            max-width: 150px;
+            position: relative;
+        }
+
+        .account-menu-item i {
+            font-size: 1.25rem;
+            width: auto;
+        }
+
+        .account-menu-item span {
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .account-menu-item.active {
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+        }
+
+        .account-menu-item:hover:not(.active) {
+            background-color: var(--light-pink);
+            transform: translateY(-2px);
+        }
+
+        /* Account Modal Specific Styles */
+        .account-modal-content {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2);
+            animation: modalAppear 0.3s ease-out;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-picture-input {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--primary-pink);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .profile-info {
+            margin-bottom: 2rem;
+        }
+
+        .profile-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .profile-info p {
+            color: var(--medium-gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-pink);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--medium-gray);
+        }
+
+        /* Settings Section */
+        .settings-section {
+            padding: 1rem 0;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .settings-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Login Section */
+        .login-section {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--medium-gray);
+            cursor: pointer;
+        }
+
+        .guest-login {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+        }
+
+        /* Orders Section */
+        .orders-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .order-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--light-gray);
+            position: relative;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .order-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .order-info p {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .order-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-green);
+        }
+
+        .status-pending {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .status-processing {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .status-cancelled {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .order-details {
+            margin-bottom: 1rem;
+        }
+
+        .order-items {
+            margin-bottom: 1rem;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            padding: 1rem 0;
+            border-top: 2px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Notifications Section */
+        .notifications-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .notification {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            border-left: 4px solid transparent;
+            position: relative;
+        }
+
+        .notification.unread {
+            border-left-color: var(--primary-pink);
+            background-color: rgba(236, 72, 153, 0.05);
+        }
+
+        .notification-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .notification-icon.info {
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+        }
+
+        .notification-icon.success {
+            background: linear-gradient(to right, var(--success-green), #34d399);
+        }
+
+        .notification-icon.warning {
+            background: linear-gradient(to right, var(--warning-yellow), #fbbf24);
+        }
+
+        .notification-icon.error {
+            background: linear-gradient(to right, #ef4444, #f87171);
+        }
+
+        .notification-icon.promotion {
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+        }
+
+        .notification-content {
+            flex-grow: 1;
+        }
+
+        .notification-content h4 {
+            margin-bottom: 0.25rem;
+            color: var(--dark-gray);
+        }
+
+        .notification-content p {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .notification-time {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+
+        .notification-timestamp {
+            font-size: 0.7rem;
+            color: var(--medium-gray);
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .notification-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Share Section */
+        .share-section {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .share-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .share-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .share-btn {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .share-btn-primary {
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+        }
+
+        .share-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .share-btn-secondary {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        .share-btn-secondary:hover {
+            background-color: var(--medium-gray);
+            color: var(--white);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            margin-bottom: 0.25rem;
+            color: var(--dark-gray);
+        }
+
+        .contact-text p {
+            color: var(--medium-gray);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-pink);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* QR Code Modal */
+        .qr-modal-content {
+            text-align: center;
+        }
+
+        #qrcode {
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Receipt Modal */
+        .receipt-modal-content {
+            max-width: 800px;
+        }
+
+        .receipt {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Courier New', monospace;
+        }
+
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px dashed #ccc;
+            padding-bottom: 1rem;
+        }
+
+        .receipt-header h3 {
+            color: var(--primary-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .receipt-details {
+            margin-bottom: 2rem;
+        }
+
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .receipt-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px dashed #ccc;
+        }
+
+        .receipt-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: var(--whatsapp-green);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Booking Confirmation */
+        .booking-confirmation {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--success-green);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1001;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Notification Badge */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .account-btn {
+            position: relative;
+        }
+
+        /* Orders Filter */
+        .orders-filter {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 2rem;
+            color: var(--medium-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(to right, var(--primary-pink), var(--primary-purple));
+            color: var(--white);
+        }
+
+        .filter-btn:hover:not(.active) {
+            background: var(--light-pink);
+            color: var(--primary-pink);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--medium-gray);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--light-pink);
+        }
+
+        /* Password Strength Meter */
+        .password-strength {
+            height: 4px;
+            background: var(--light-gray);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .password-strength-meter {
+            height: 100%;
+            width: 0%;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .strength-weak {
+            background: #ef4444;
+            width: 25%;
+        }
+
+        .strength-fair {
+            background: #f59e0b;
+            width: 50%;
+        }
+
+        .strength-good {
+            background: #10b981;
+            width: 75%;
+        }
+
+        .strength-strong {
+            background: #10b981;
+            width: 100%;
+        }
+
+        .password-requirements {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--medium-gray);
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .requirement.met {
+            color: var(--success-green);
+        }
+
+        .requirement.not-met {
+            color: var(--medium-gray);
+        }
+
+        /* Account Content */
+        .account-content {
+            display: none;
+        }
+
+        .account-content.active {
+            display: block;
+        }
+
+        /* Developer Button Styles */
+        .developer-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+            justify-content: center;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .developer-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .developer-button i {
+            font-size: 1.25rem;
+        }
+
+        .developer-details {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+            box-shadow: var(--shadow);
+            border-left: 4px solid #667eea;
+        }
+
+        .developer-details h4 {
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .developer-details p {
+            color: var(--medium-gray);
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .developer-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .developer-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .developer-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .developer-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+        }
+
+        .developer-feature i {
+            color: var(--success-green);
+        }
+
+        /* Terms Acceptance Modal Styles */
+        .terms-acceptance-content {
+            padding: 1rem 0;
+        }
+
+        .terms-acceptance-content h4 {
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+
+        .terms-acceptance-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            color: var(--medium-gray);
+        }
+
+        .terms-acceptance-content li {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile View Improvements */
+        @media (max-width: 1024px) {
+            .about-content, .contact-grid, .two-column-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .grid-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .slogan-large {
+                font-size: 1.5rem;
+            }
+
+            .slogan {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .order-actions {
+                flex-direction: column;
+            }
+
+            .order-actions button {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .orders-filter {
+                flex-direction: column;
+            }
+
+            .account-menu {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 0.5rem;
+            }
+            
+            .account-menu-item {
+                min-width: 70px;
+                padding: 0.5rem;
+                flex-direction: column;
+            }
+            
+            .account-menu-item i {
+                font-size: 1.25rem;
+                margin-bottom: 0.25rem;
+            }
+            
+            .account-menu-item span {
+                font-size: 0.7rem;
+                display: none;
+            }
+            
+            .account-menu-item.active span {
+                display: block;
+            }
+            
+            .developer-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .slogan-large {
+                font-size: 1.2rem;
+            }
+
+            .hero p, .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .terms-content {
+                padding: 1.5rem;
+            }
+
+            .account-menu-item {
+                min-width: 60px;
+                padding: 0.4rem;
+            }
+            
+            .account-menu-item.active {
+                min-width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div>
+                    <div class="logo-text">Maria Nail Art Studio</div>
+                    <div class="slogan">Beauty at Your Fingertips</div>
+                </div>
+            </div>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                </ul>
+
+                <div class="header-controls">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" placeholder="Search services...">
+                    </div>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="account-btn" id="accountBtn">
+                        <i class="fas fa-user"></i>
+                        <span class="notification-badge" id="notificationBadge" style="display: none;"></span>
+                    </button>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1 class="reveal">Transform Your Nails in Kenya</h1>
+        <div class="slogan-large reveal">Where Beauty Meets Perfection</div>
+        <p class="reveal">Experience luxury nail care with expert technicians using premium products. Book your appointment today and let your nails tell your story.</p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary reveal" id="bookHomeServiceBtn">
+                <i class="fas fa-home"></i>
+                Book Home Service
+            </button>
+            <button class="btn btn-secondary reveal" id="viewServicesBtn">
+                <i class="fas fa-spa"></i>
+                View All Services
+            </button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title reveal">Our Services</h2>
+        <p class="section-subtitle reveal">Professional nail care tailored to your needs</p>
+        
+        <div class="services-grid" id="servicesGrid">
+            <!-- Services will be dynamically generated here -->
+        </div>
+    </section>
+
+    <!-- Two Column Grid Section -->
+    <section class="about reveal" id="about">
+        <div class="two-column-grid">
+            <div class="grid-image reveal">
+                <i class="fas fa-spa"></i>
+            </div>
+            <div class="grid-content reveal">
+                <h3>Why Choose Maria Nail Art Studio?</h3>
+                <p>For over 8 years, we've been transforming nails and creating beautiful experiences for our clients. Our studio combines expertise with passion to deliver exceptional results every time.</p>
+                <p>Our certified technicians are trained in the latest techniques and use only premium, salon-quality products to ensure your nails look stunning and stay healthy.</p>
+            </div>
+        </div>
+
+        <div class="two-column-grid">
+            <div class="grid-content reveal">
+                <h3>Premium Home Services</h3>
+                <p>Can't make it to our studio? We bring luxury nail care to your doorstep. Our mobile team is equipped with everything needed to provide a salon-quality experience in the comfort of your home.</p>
+                <p>Available across Nairobi County, our home services include all the amenities you'd find in our studio, plus the convenience of your own space.</p>
+            </div>
+            <div class="grid-image reveal">
+                <i class="fas fa-home"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section reveal" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Get in touch with our team</p>
+        
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-item reveal">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Our Studio</h4>
+                        <p>Westlands Shopping Mall, 3rd Floor</p>
+                        <p>Nairobi, Kenya</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item reveal">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Call Us</h4>
+                        <p>+254 712 345 678</p>
+                        <p>+254 734 567 890</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item reveal">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Email Us</h4>
+                        <p>info@marianailstudio.co.ke</p>
+                        <p>bookings@marianailstudio.co.ke</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item reveal">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Working Hours</h4>
+                        <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+                        <p>Saturday - Sunday: 10:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="social-links reveal">
+                    <a href="https://wa.me/254712345678" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/litemaria.nailartstudio?igsh=ZXUwb3diMDgxOHZw" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="contact-form reveal">
+                <h3 style="margin-bottom: 1.5rem;">Send us a message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Full Name</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Phone Number</label>
+                        <input type="tel" id="contactPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms & Conditions Section -->
+    <section class="terms-section reveal" id="terms">
+        <h2 class="section-title">Terms & Conditions</h2>
+        <p class="section-subtitle">Please read our terms carefully</p>
+        
+        <div class="terms-content">
+            <h3>Terms of Service</h3>
+            <p>Welcome to Maria Nail Art Studio. By using our services, you agree to these terms and conditions.</p>
+            
+            <h4>1. Booking and Appointments</h4>
+            <ul>
+                <li>All appointments require a confirmation call or message</li>
+                <li>Please arrive 10 minutes before your scheduled appointment</li>
+                <li>Late arrivals may result in shortened service time</li>
+                <li>Cancellations must be made at least 24 hours in advance</li>
+            </ul>
+            
+            <h4>2. Payment Terms</h4>
+            <ul>
+                <li>All services must be paid for at the time of service</li>
+                <li>We accept cash, M-Pesa, and credit/debit cards</li>
+                <li>Home services require 50% deposit upon booking</li>
+                <li>Prices are subject to change without notice</li>
+            </ul>
+            
+            <h4>3. Service Guarantee</h4>
+            <ul>
+                <li>We guarantee all our work for 7 days from service date</li>
+                <li>Any issues must be reported within 24 hours</li>
+                <li>We are not responsible for allergic reactions to products</li>
+                <li>Patch tests available upon request</li>
+            </ul>
+            
+            <h4>4. Health and Safety</h4>
+            <ul>
+                <li>All tools are sterilized after each use</li>
+                <li>Please inform us of any medical conditions or allergies</li>
+                <li>We reserve the right to refuse service for health reasons</li>
+                <li>Sanitation and hygiene are our top priority</li>
+            </ul>
+            
+            <h4>5. Home Services</h4>
+            <ul>
+                <li>Available within Nairobi County only</li>
+                <li>Additional travel charges may apply for distant locations</li>
+                <li>Client must provide adequate workspace and lighting</li>
+                <li>Pets should be secured during service</li>
+            </ul>
+            
+            <p>Last updated: April 2024</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="reveal">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Maria Nail Art Studio</h3>
+                <p>Premium nail care services in Nairobi, Kenya. Experience luxury and professionalism at our studio or in the comfort of your home.</p>
+                <div class="social-links">
+                    <a href="https://wa.me/254712345678" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/litemaria.nailartstudio?igsh=ZXUwb3diMDgxOHZw" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#terms">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#services">Nail Treatments</a></li>
+                    <li><a href="#services">Manicure & Pedicure</a></li>
+                    <li><a href="#services">Nail Art</a></li>
+                    <li><a href="#services">Home Services</a></li>
+                    <li><a href="#services">Nail Repair</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter & Support</h3>
+                <p>Subscribe to get updates on offers and new services</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+                
+                <!-- Improved Developer button -->
+                <button class="developer-button" id="contactDeveloperBtn">
+                    <i class="fas fa-code"></i> Contact Developer
+                </button>
+                
+                <!-- Developer Details -->
+                <div class="developer-details" id="developerDetails" style="display: none;">
+                    <div class="developer-info">
+                        <div class="developer-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h4>Website Developer</h4>
+                            <p>Custom web solutions for businesses</p>
+                        </div>
+                    </div>
+                    
+                    <div class="developer-features">
+                        <div class="developer-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Professional Web Development</span>
+                        </div>
+                        <div class="developer-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Responsive Mobile Design</span>
+                        </div>
+                        <div class="developer-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>E-commerce Solutions</span>
+                        </div>
+                        <div class="developer-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Booking System Integration</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <button class="btn btn-outline btn-small" id="whatsappDeveloperBtn" style="width: 100%;">
+                            <i class="fab fa-whatsapp"></i> WhatsApp Developer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Maria Nail Art Studio. All rights reserved. | Nairobi, Kenya</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--primary-pink);"></i> for nail care enthusiasts</p>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="bookingModalTitle">Book Service</h3>
+                <button class="modal-close" id="closeBookingModal">&times;</button>
+            </div>
+            
+            <form id="bookingForm">
+                <input type="hidden" id="bookingServiceName">
+                <input type="hidden" id="bookingServicePrice">
+                <input type="hidden" id="bookingServiceId">
+                
+                <div class="form-group">
+                    <label for="bookingName">Full Name *</label>
+                    <input type="text" id="bookingName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingPhone">Phone Number *</label>
+                    <input type="tel" id="bookingPhone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Service Location *</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="locationStudio" name="location" value="studio" checked>
+                            <label for="locationStudio">At Studio</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="locationHome" name="location" value="home">
+                            <label for="locationHome">Home Service</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="homeAddressGroup" style="display: none;">
+                    <label for="homeAddress">Home Address *</label>
+                    <input type="text" id="homeAddress" placeholder="Enter your full address">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingDate">Preferred Date *</label>
+                    <input type="date" id="bookingDate" required min="">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingTime">Preferred Time *</label>
+                    <select id="bookingTime" required>
+                        <option value="">Select time</option>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="15:00">03:00 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="17:00">05:00 PM</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingNotes">Additional Notes</label>
+                    <textarea id="bookingNotes" rows="3" placeholder="Any special requests or instructions"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fab fa-whatsapp"></i> Book via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="modal" id="accountModal">
+        <div class="account-modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">My Account</h3>
+                <button class="modal-close" id="closeAccountModal">&times;</button>
+            </div>
+            
+            <!-- Account Menu -->
+            <div class="account-menu" id="accountMenu">
+                <button class="account-menu-item active" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </button>
+                <button class="account-menu-item" data-section="orders">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>My Orders</span>
+                </button>
+                <button class="account-menu-item" data-section="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                    <span class="notification-badge" id="menuNotificationBadge" style="display: none;"></span>
+                </button>
+                <button class="account-menu-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </button>
+                <button class="account-menu-item" data-section="share">
+                    <i class="fas fa-share-alt"></i>
+                    <span>Share</span>
+                </button>
+                <button class="account-menu-item" data-section="login" id="loginMenuItem" style="display: none;">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </button>
+            </div>
+            
+            <!-- Profile Content -->
+            <div class="account-content active" id="profileContent">
+                <div class="profile-section">
+                    <div class="profile-picture" id="profilePictureContainer">
+                        <!-- Profile picture will be loaded here -->
+                    </div>
+                    <div class="profile-info" id="profileInfo">
+                        <!-- Profile info will be loaded here -->
+                    </div>
+                    
+                    <div class="profile-stats" id="profileStats">
+                        <!-- Profile stats will be loaded here -->
+                    </div>
+                    
+                    <div class="account-actions" id="profileActions" style="display: none;">
+                        <button class="btn btn-primary" id="editProfileBtn" style="width: 100%;">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                        <button class="btn btn-secondary" id="logoutBtn" style="width: 100%;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Orders Content -->
+            <div class="account-content" id="ordersContent">
+                <div class="orders-filter" id="ordersFilter">
+                    <button class="filter-btn active" data-filter="all">All Orders</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+                </div>
+                
+                <div class="orders-grid" id="ordersList">
+                    <!-- Orders will be dynamically generated here -->
+                </div>
+            </div>
+            
+            <!-- Notifications Content -->
+            <div class="account-content" id="notificationsContent">
+                <div class="notifications-header">
+                    <h4>Notifications</h4>
+                    <div>
+                        <button class="btn btn-small btn-outline" id="markAllReadBtn">
+                            <i class="fas fa-check-double"></i> Mark All Read
+                        </button>
+                        <button class="btn btn-small btn-secondary" id="clearNotificationsBtn">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="notificationsList">
+                    <!-- Notifications will be dynamically generated here -->
+                </div>
+            </div>
+            
+            <!-- Settings Content -->
+            <div class="account-content" id="settingsContent">
+                <div class="settings-section">
+                    <h3>Account Settings</h3>
+                    
+                    <div class="settings-form">
+                        <h4 style="margin-bottom: 1rem; color: var(--dark-gray);">Edit Profile</h4>
+                        <form id="editProfileForm">
+                            <div class="form-group">
+                                <label for="editName">Full Name</label>
+                                <input type="text" id="editName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editEmail">Email Address</label>
+                                <input type="email" id="editEmail">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editPhone">Phone Number</label>
+                                <input type="tel" id="editPhone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editAddress">Address</label>
+                                <textarea id="editAddress" rows="2" placeholder="Your address"></textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--light-gray);">
+                        
+                        <h4 style="margin-bottom: 1rem; color: var(--dark-gray);">Change Password</h4>
+                        <form id="changePasswordForm">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <div class="password-container">
+                                    <input type="password" id="currentPassword" required>
+                                    <button type="button" class="password-toggle" data-target="currentPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <div class="password-container">
+                                    <input type="password" id="newPassword" required>
+                                    <button type="button" class="password-toggle" data-target="newPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength">
+                                    <div class="password-strength-meter" id="passwordStrength"></div>
+                                </div>
+                                <div class="password-requirements">
+                                    <div class="requirement" id="reqLength">
+                                        <i class="fas fa-circle" style="font-size: 0.5rem;"></i>
+                                        <span>At least 6 characters</span>
+                                    </div>
+                                    <div class="requirement" id="reqUppercase">
+                                        <i class="fas fa-circle" style="font-size: 0.5rem;"></i>
+                                        <span>Contains uppercase letter</span>
+                                    </div>
+                                    <div class="requirement" id="reqLowercase">
+                                        <i class="fas fa-circle" style="font-size: 0.5rem;"></i>
+                                        <span>Contains lowercase letter</span>
+                                    </div>
+                                    <div class="requirement" id="reqNumber">
+                                        <i class="fas fa-circle" style="font-size: 0.5rem;"></i>
+                                        <span>Contains number</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <div class="password-container">
+                                    <input type="password" id="confirmPassword" required>
+                                    <button type="button" class="password-toggle" data-target="confirmPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-key"></i> Change Password
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Share Content -->
+            <div class="account-content" id="shareContent">
+                <div class="share-section">
+                    <h3>Share Maria Nail Studio</h3>
+                    <p style="margin-bottom: 2rem; color: var(--medium-gray);">Spread the word about our premium nail services</p>
+                    
+                    <div class="share-actions">
+                        <button class="share-btn share-btn-primary" id="shareWhatsAppBtnModal">
+                            <i class="fab fa-whatsapp"></i>
+                            Share on WhatsApp
+                        </button>
+                        <button class="share-btn share-btn-secondary" id="copyLinkBtnModal">
+                            <i class="fas fa-link"></i>
+                            Copy Website Link
+                        </button>
+                        <button class="share-btn share-btn-secondary" id="shareFacebookBtn">
+                            <i class="fab fa-facebook-f"></i>
+                            Share on Facebook
+                        </button>
+                        <button class="share-btn share-btn-secondary" id="generateQRBtn">
+                            <i class="fas fa-qrcode"></i>
+                            Generate QR Code
+                        </button>
+                        <button class="developer-button" id="contactDeveloperBtnShare">
+                            <i class="fas fa-code"></i>
+                            Contact Developer
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Login Content -->
+            <div class="account-content" id="loginContent">
+                <div class="login-section">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center;">Login to Your Account</h3>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginPhone">Phone Number</label>
+                            <input type="tel" id="loginPhone" required placeholder="+254 712 345 678">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <div class="password-container">
+                                <input type="password" id="loginPassword" required placeholder="Enter your password">
+                                <button type="button" class="password-toggle" data-target="loginPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <small style="color: var(--medium-gray); display: block; margin-top: 0.5rem;">
+                                <i class="fas fa-info-circle"></i> Default password: nail123
+                            </small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </form>
+                    
+                    <div class="guest-login">
+                        <p style="margin-bottom: 1rem; color: var(--medium-gray);">Don't have an account?</p>
+                        <button class="btn btn-outline" id="guestLoginBtn" style="width: 100%;">
+                            <i class="fas fa-user-clock"></i> Continue as Guest
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Acceptance Modal -->
+    <div class="modal" id="termsAcceptanceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Terms & Conditions Acceptance</h3>
+                <button class="modal-close" id="closeTermsModal">&times;</button>
+            </div>
+            <div class="terms-acceptance-content">
+                <div style="max-height: 300px; overflow-y: auto; margin-bottom: 1.5rem; padding: 1rem; border: 1px solid var(--light-gray); border-radius: 0.5rem;">
+                    <h4>Please read and accept our Terms & Conditions:</h4>
+                    <ul>
+                        <li>All appointments require confirmation call or message</li>
+                        <li>Late arrivals may result in shortened service time</li>
+                        <li>Cancellations must be made at least 24 hours in advance</li>
+                        <li>All services must be paid for at the time of service</li>
+                        <li>Home services require 50% deposit upon booking</li>
+                        <li>We guarantee all our work for 7 days from service date</li>
+                        <li>All tools are sterilized after each use</li>
+                        <li>Please inform us of any medical conditions or allergies</li>
+                        <li>Available within Nairobi County only</li>
+                        <li>Additional travel charges may apply for distant locations</li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 1.5rem;">
+                        <input type="checkbox" id="acceptTerms" style="margin-top: 0.25rem;">
+                        <label for="acceptTerms" style="font-size: 0.9rem;">
+                            I have read and agree to the Terms & Conditions of Maria Nail Art Studio. 
+                            I understand that I am responsible for providing accurate information and 
+                            will adhere to the cancellation policy.
+                        </label>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" id="confirmTermsBtn" style="width: 100%;" disabled>
+                    <i class="fas fa-check-circle"></i> Accept & Continue Booking
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content qr-modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Website QR Code</h3>
+                <button class="modal-close" id="closeQRModal">&times;</button>
+            </div>
+            <div id="qrcode"></div>
+            <p style="margin-top: 1rem;">Scan this QR code to visit our website</p>
+            <button class="btn btn-primary" id="downloadQRBtn" style="margin-top: 1.5rem;">
+                <i class="fas fa-download"></i> Download QR Code
+            </button>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="modal" id="receiptModal">
+        <div class="modal-content receipt-modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Order Receipt</h3>
+                <button class="modal-close" id="closeReceiptModal">&times;</button>
+            </div>
+            <div id="receiptContent">
+                <!-- Receipt will be generated here -->
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn btn-primary" id="downloadReceiptBtn">
+                    <i class="fas fa-download"></i> Download Receipt (PDF)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation -->
+    <div class="booking-confirmation" id="bookingConfirmation">
+        <i class="fas fa-check-circle"></i>
+        <span>Booking request sent!</span>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/254712345678?text=Hi%20Maria%20Nail%20Studio%2C%20I%20have%20a%20question" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Services Data in Kenyan Shillings
+        const services = [
+            {
+                id: 1,
+                name: "Nail Removal",
+                description: "Gentle and safe removal of acrylic, gel, or dip powder nails",
+                price: 500,
+                duration: "30 mins",
+                icon: "fas fa-cut",
+                category: "treatment"
+            },
+            {
+                id: 2,
+                name: "Classic Manicure",
+                description: "Basic nail care with cuticle work, shaping, and polish",
+                price: 800,
+                duration: "45 mins",
+                icon: "fas fa-hand-sparkles",
+                category: "manicure"
+            },
+            {
+                id: 3,
+                name: "Deluxe Pedicure",
+                description: "Full foot treatment with exfoliation, massage, and polish",
+                price: 1200,
+                duration: "60 mins",
+                icon: "fas fa-spa",
+                category: "pedicure",
+                badge: "Popular"
+            },
+            {
+                id: 4,
+                name: "Nail Repair",
+                description: "Quick fixes for broken, chipped, or damaged nails",
+                price: 400,
+                duration: "20 mins",
+                icon: "fas fa-wrench",
+                category: "treatment"
+            },
+            {
+                id: 5,
+                name: "Gel Nails",
+                description: "Long-lasting gel polish application with UV curing",
+                price: 1500,
+                duration: "75 mins",
+                icon: "fas fa-gem",
+                category: "nail-art"
+            },
+            {
+                id: 6,
+                name: "Nail Art Design",
+                description: "Custom nail art with patterns, gems, and designs",
+                price: 1800,
+                duration: "90 mins",
+                icon: "fas fa-paint-brush",
+                category: "nail-art"
+            },
+            {
+                id: 7,
+                name: "Spa Pedicure",
+                description: "Luxury foot treatment with paraffin wax and massage",
+                price: 1500,
+                duration: "75 mins",
+                icon: "fas fa-water",
+                category: "pedicure"
+            },
+            {
+                id: 8,
+                name: "Home Service Package",
+                description: "Full manicure & pedicure at your location (Nairobi only)",
+                price: 3000,
+                duration: "120 mins",
+                icon: "fas fa-home",
+                category: "home-service",
+                badge: "Home Service"
+            }
+        ];
+
+        // Default users
+        const defaultUsers = {
+            "254712345678": {
+                phone: "+254 712 345 678",
+                password: "nail123",
+                name: "Jane Doe",
+                email: "jane@example.com",
+                address: "123 Westlands, Nairobi",
+                visits: 5,
+                totalSpent: 8200,
+                profilePicture: null,
+                isGuest: false
+            },
+            "254734567890": {
+                phone: "+254 734 567 890",
+                password: "nail123",
+                name: "John Smith",
+                email: "john@example.com",
+                address: "456 Karen, Nairobi",
+                visits: 3,
+                totalSpent: 4500,
+                profilePicture: null,
+                isGuest: false
+            }
+        };
+
+        // Current user data
+        let currentUser = null;
+
+        // Sample notifications data
+        const sampleNotifications = [
+            {
+                id: 1,
+                title: "Welcome to Maria Nail Studio!",
+                message: "Thank you for joining us. Get 10% off your first booking with code WELCOME10",
+                type: "promotion",
+                time: new Date(Date.now() - 3600000).toISOString(),
+                read: false
+            },
+            {
+                id: 2,
+                title: "Appointment Confirmed",
+                message: "Your gel nails appointment for tomorrow at 2:00 PM has been confirmed",
+                type: "success",
+                time: new Date(Date.now() - 7200000).toISOString(),
+                read: false
+            },
+            {
+                id: 3,
+                title: "Special Offer",
+                message: "This weekend only: 20% off all pedicure services",
+                type: "promotion",
+                time: new Date(Date.now() - 86400000).toISOString(),
+                read: true
+            },
+            {
+                id: 4,
+                title: "New Service Available",
+                message: "Try our new luxury spa manicure with hot stone massage",
+                type: "info",
+                time: new Date(Date.now() - 172800000).toISOString(),
+                read: true
+            },
+            {
+                id: 5,
+                title: "Reminder",
+                message: "Your next appointment is in 2 days. Please confirm your availability",
+                type: "warning",
+                time: new Date(Date.now() - 259200000).toISOString(),
+                read: true
+            }
+        ];
+
+        // DOM Elements
+        const themeToggle = document.getElementById('themeToggle');
+        const searchInput = document.getElementById('searchInput');
+        const accountBtn = document.getElementById('accountBtn');
+        const notificationBadge = document.getElementById('notificationBadge');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        const servicesGrid = document.getElementById('servicesGrid');
+        const bookingModal = document.getElementById('bookingModal');
+        const bookingModalTitle = document.getElementById('bookingModalTitle');
+        const closeBookingModal = document.getElementById('closeBookingModal');
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingConfirmation = document.getElementById('bookingConfirmation');
+        const locationRadios = document.querySelectorAll('input[name="location"]');
+        const homeAddressGroup = document.getElementById('homeAddressGroup');
+        const bookingDateInput = document.getElementById('bookingDate');
+        const contactForm = document.getElementById('contactForm');
+        const accountModal = document.getElementById('accountModal');
+        const closeAccountModal = document.getElementById('closeAccountModal');
+        const accountMenu = document.getElementById('accountMenu');
+        const accountMenuItems = document.querySelectorAll('.account-menu-item');
+        const accountContents = document.querySelectorAll('.account-content');
+        const ordersList = document.getElementById('ordersList');
+        const ordersFilter = document.getElementById('ordersFilter');
+        const notificationsList = document.getElementById('notificationsList');
+        const markAllReadBtn = document.getElementById('markAllReadBtn');
+        const clearNotificationsBtn = document.getElementById('clearNotificationsBtn');
+        const loginMenuItem = document.getElementById('loginMenuItem');
+        const loginForm = document.getElementById('loginForm');
+        const guestLoginBtn = document.getElementById('guestLoginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const profilePictureContainer = document.getElementById('profilePictureContainer');
+        const profileInfo = document.getElementById('profileInfo');
+        const profileStats = document.getElementById('profileStats');
+        const profileActions = document.getElementById('profileActions');
+        const editProfileForm = document.getElementById('editProfileForm');
+        const changePasswordForm = document.getElementById('changePasswordForm');
+        const qrModal = document.getElementById('qrModal');
+        const closeQRModal = document.getElementById('closeQRModal');
+        const generateQRBtn = document.getElementById('generateQRBtn');
+        const downloadQRBtn = document.getElementById('downloadQRBtn');
+        const receiptModal = document.getElementById('receiptModal');
+        const closeReceiptModal = document.getElementById('closeReceiptModal');
+        const receiptContent = document.getElementById('receiptContent');
+        const downloadReceiptBtn = document.getElementById('downloadReceiptBtn');
+        const newPasswordInput = document.getElementById('newPassword');
+        const menuNotificationBadge = document.getElementById('menuNotificationBadge');
+        const editProfileBtn = document.getElementById('editProfileBtn');
+        const contactDeveloperBtn = document.getElementById('contactDeveloperBtn');
+        const contactDeveloperBtnShare = document.getElementById('contactDeveloperBtnShare');
+        const developerDetails = document.getElementById('developerDetails');
+        const whatsappDeveloperBtn = document.getElementById('whatsappDeveloperBtn');
+        const termsAcceptanceModal = document.getElementById('termsAcceptanceModal');
+        const closeTermsModal = document.getElementById('closeTermsModal');
+        const acceptTermsCheckbox = document.getElementById('acceptTerms');
+        const confirmTermsBtn = document.getElementById('confirmTermsBtn');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeServices();
+            setMinBookingDate();
+            setupEventListeners();
+            loadUserPreferences();
+            setupScrollReveal();
+            initializeNotifications();
+            setupAccountMenu();
+            checkLoginStatus();
+        });
+
+        // Initialize services grid
+        function initializeServices() {
+            servicesGrid.innerHTML = '';
+            
+            services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card reveal';
+                serviceCard.setAttribute('data-category', service.category);
+                
+                let badgeHtml = '';
+                if (service.badge) {
+                    badgeHtml = `<span class="service-badge">${service.badge}</span>`;
+                }
+                
+                serviceCard.innerHTML = `
+                    ${badgeHtml}
+                    <div class="service-icon">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <h3 class="service-name">${service.name}</h3>
+                    <p class="service-description">${service.description}</p>
+                    <div class="service-details">
+                        <span class="service-price">KSH ${service.price.toLocaleString()}</span>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i>
+                            <span>${service.duration}</span>
+                        </div>
+                    </div>
+                    <button class="service-btn" data-id="${service.id}">Book Now</button>
+                `;
+                
+                servicesGrid.appendChild(serviceCard);
+            });
+            
+            // Add event listeners to service buttons
+            document.querySelectorAll('.service-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const serviceId = parseInt(this.getAttribute('data-id'));
+                    openBookingModal(serviceId);
+                });
+            });
+        }
+
+        // Setup account menu functionality
+        function setupAccountMenu() {
+            accountMenuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+                    
+                    // Update active menu item
+                    accountMenuItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    showAccountSection(section);
+                    
+                    // Load section data
+                    loadSectionData(section);
+                });
+            });
+        }
+
+        // Show specific account section
+        function showAccountSection(section) {
+            accountContents.forEach(content => content.classList.remove('active'));
+            const targetContent = document.getElementById(`${section}Content`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        }
+
+        // Load data for specific section
+        function loadSectionData(section) {
+            switch(section) {
+                case 'profile':
+                    loadProfileData();
+                    break;
+                case 'orders':
+                    initializeOrders();
+                    break;
+                case 'notifications':
+                    loadNotifications();
+                    break;
+                case 'settings':
+                    loadSettingsForms();
+                    break;
+            }
+        }
+
+        // Initialize notifications
+        function initializeNotifications() {
+            const notifications = getUserNotifications();
+            updateNotificationBadge(notifications);
+        }
+
+        // Update notification badge
+        function updateNotificationBadge(notifications) {
+            const unreadCount = notifications.filter(n => !n.read).length;
+            if (unreadCount > 0) {
+                notificationBadge.textContent = unreadCount;
+                notificationBadge.style.display = 'flex';
+                menuNotificationBadge.textContent = unreadCount;
+                menuNotificationBadge.style.display = 'flex';
+            } else {
+                notificationBadge.style.display = 'none';
+                menuNotificationBadge.style.display = 'none';
+            }
+        }
+
+        // Initialize orders for current user
+        function initializeOrders(filter = 'all') {
+            ordersList.innerHTML = '';
+            
+            const userOrders = getUserOrders();
+            let filteredOrders = userOrders;
+            
+            if (filter !== 'all') {
+                filteredOrders = userOrders.filter(order => order.status === filter);
+            }
+            
+            if (filteredOrders.length === 0) {
+                let message = '';
+                switch(filter) {
+                    case 'completed':
+                        message = 'No completed orders yet.';
+                        break;
+                    case 'pending':
+                        message = 'No pending orders.';
+                        break;
+                    case 'cancelled':
+                        message = 'No cancelled orders.';
+                        break;
+                    default:
+                        message = 'No orders yet. Book your first service!';
+                }
+                
+                ordersList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>${message}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredOrders.forEach(order => {
+                const orderCard = document.createElement('div');
+                orderCard.className = 'order-card';
+                
+                let statusClass = '';
+                let statusText = '';
+                
+                switch(order.status) {
+                    case 'completed':
+                        statusClass = 'status-completed';
+                        statusText = 'Completed';
+                        break;
+                    case 'processing':
+                        statusClass = 'status-processing';
+                        statusText = 'Processing';
+                        break;
+                    case 'pending':
+                        statusClass = 'status-pending';
+                        statusText = 'Pending';
+                        break;
+                    case 'cancelled':
+                        statusClass = 'status-cancelled';
+                        statusText = 'Cancelled';
+                        break;
+                }
+                
+                let itemsHtml = '';
+                order.items.forEach(item => {
+                    itemsHtml += `
+                        <div class="order-item">
+                            <span>${item.name}</span>
+                            <span>KSH ${parseInt(item.price).toLocaleString()}</span>
+                        </div>
+                    `;
+                });
+                
+                // Action buttons based on order status
+                let actionButtons = '';
+                if (order.status === 'completed') {
+                    actionButtons = `
+                        <button class="btn btn-small btn-success download-receipt-btn" data-order="${order.id}">
+                            <i class="fas fa-download"></i> Download Receipt
+                        </button>
+                        <button class="btn btn-small btn-primary reorder-btn" data-order="${order.id}">
+                            <i class="fas fa-redo"></i> Reorder
+                        </button>
+                    `;
+                } else if (order.status === 'pending') {
+                    actionButtons = `
+                        <button class="btn btn-small btn-warning cancel-order-btn" data-order="${order.id}">
+                            <i class="fas fa-times"></i> Cancel Order
+                        </button>
+                    `;
+                } else if (order.status === 'cancelled') {
+                    actionButtons = `
+                        <button class="btn btn-small btn-outline reorder-btn" data-order="${order.id}">
+                            <i class="fas fa-redo"></i> Reorder
+                        </button>
+                    `;
+                }
+                
+                orderCard.innerHTML = `
+                    <div class="order-header">
+                        <div class="order-info">
+                            <h4>${order.service}</h4>
+                            <p>Order #${order.id} | ${formatDate(order.date)} | ${order.time}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> ${order.location}</p>
+                        </div>
+                        <div class="order-status ${statusClass}">${statusText}</div>
+                    </div>
+                    <div class="order-details">
+                        <div class="order-items">
+                            ${itemsHtml}
+                        </div>
+                        <div class="order-total">
+                            <span>Total Amount:</span>
+                            <span>KSH ${parseInt(order.price).toLocaleString()}</span>
+                        </div>
+                    </div>
+                    <div class="order-actions">
+                        ${actionButtons}
+                    </div>
+                `;
+                
+                ordersList.appendChild(orderCard);
+            });
+            
+            // Add event listeners to order buttons
+            setupOrderButtonListeners();
+        }
+
+        // Load notifications
+        function loadNotifications() {
+            notificationsList.innerHTML = '';
+            
+            const userNotifications = getUserNotifications();
+            
+            if (userNotifications.length === 0) {
+                notificationsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-bell"></i>
+                        <p>No notifications yet.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            userNotifications.forEach(notification => {
+                const notificationElement = document.createElement('div');
+                notificationElement.className = `notification ${notification.read ? '' : 'unread'}`;
+                notificationElement.setAttribute('data-id', notification.id);
+                
+                let iconClass = '';
+                switch(notification.type) {
+                    case 'success':
+                        iconClass = 'success';
+                        break;
+                    case 'warning':
+                        iconClass = 'warning';
+                        break;
+                    case 'error':
+                        iconClass = 'error';
+                        break;
+                    case 'promotion':
+                        iconClass = 'promotion';
+                        break;
+                    default:
+                        iconClass = 'info';
+                }
+                
+                notificationElement.innerHTML = `
+                    <div class="notification-icon ${iconClass}">
+                        <i class="${notification.type === 'promotion' ? 'fas fa-gift' : 
+                                  notification.type === 'success' ? 'fas fa-check-circle' :
+                                  notification.type === 'warning' ? 'fas fa-exclamation-triangle' :
+                                  notification.type === 'error' ? 'fas fa-times-circle' : 'fas fa-info-circle'}"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4>${notification.title}</h4>
+                        <p>${notification.message}</p>
+                        <div class="notification-timestamp">
+                            <i class="far fa-clock"></i>
+                            <span>${formatDate(notification.time)} at ${formatTime(notification.time)}</span>
+                        </div>
+                    </div>
+                    <div class="notification-actions">
+                        ${!notification.read ? `
+                            <button class="btn btn-small btn-outline mark-read-btn" data-id="${notification.id}">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        ` : ''}
+                        <button class="btn btn-small btn-secondary delete-notification-btn" data-id="${notification.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                notificationsList.appendChild(notificationElement);
+            });
+            
+            // Add event listeners to notification buttons
+            setupNotificationButtonListeners();
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'short', 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        // Format time
+        function formatTime(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+        }
+
+        // Set minimum booking date to today
+        function setMinBookingDate() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const formattedDate = tomorrow.toISOString().split('T')[0];
+            bookingDateInput.min = formattedDate;
+            bookingDateInput.value = formattedDate;
+        }
+
+        // Setup scroll reveal
+        function setupScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOnScroll = () => {
+                reveals.forEach(element => {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < windowHeight - elementVisible) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+            
+            revealOnScroll();
+            window.addEventListener('scroll', revealOnScroll);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Theme toggle
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            // Search functionality
+            searchInput.addEventListener('input', filterServices);
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Account button
+            accountBtn.addEventListener('click', () => {
+                accountModal.style.display = 'flex';
+                navLinks.classList.remove('active');
+                updateNotificationBadge(getUserNotifications());
+                
+                // Show appropriate section based on login status
+                if (currentUser) {
+                    showAccountSection('profile');
+                    document.querySelector('[data-section="profile"]').classList.add('active');
+                    loadProfileData();
+                } else {
+                    showAccountSection('login');
+                    document.querySelector('[data-section="login"]').classList.add('active');
+                }
+            });
+            
+            // Navigation links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                    navLinks.classList.remove('active');
+                    
+                    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+            
+            // Home service booking button
+            document.getElementById('bookHomeServiceBtn').addEventListener('click', () => {
+                const homeService = services.find(s => s.name === "Home Service Package");
+                if (homeService) openBookingModal(homeService.id);
+            });
+            
+            // View services button
+            document.getElementById('viewServicesBtn').addEventListener('click', () => {
+                document.querySelector('#services').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Modal close buttons
+            closeBookingModal.addEventListener('click', () => bookingModal.style.display = 'none');
+            closeAccountModal.addEventListener('click', () => accountModal.style.display = 'none');
+            closeQRModal.addEventListener('click', () => qrModal.style.display = 'none');
+            closeReceiptModal.addEventListener('click', () => receiptModal.style.display = 'none');
+            closeTermsModal.addEventListener('click', () => termsAcceptanceModal.style.display = 'none');
+            
+            // Location radio buttons
+            locationRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    homeAddressGroup.style.display = this.value === 'home' ? 'block' : 'none';
+                });
+            });
+            
+            // Booking form submission
+            bookingForm.addEventListener('submit', submitBooking);
+            
+            // Contact form
+            contactForm.addEventListener('submit', submitContactForm);
+            
+            // Login form
+            loginForm.addEventListener('submit', handleLogin);
+            
+            // Guest login
+            guestLoginBtn.addEventListener('click', handleGuestLogin);
+            
+            // Logout
+            logoutBtn.addEventListener('click', handleLogout);
+            
+            // Edit profile button
+            editProfileBtn.addEventListener('click', () => {
+                showAccountSection('settings');
+                document.querySelector('[data-section="settings"]').classList.add('active');
+            });
+            
+            // Toggle password visibility
+            document.querySelectorAll('.password-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const passwordInput = document.getElementById(targetId);
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+                });
+            });
+            
+            // Edit profile form
+            editProfileForm.addEventListener('submit', handleEditProfile);
+            
+            // Change password form
+            changePasswordForm.addEventListener('submit', handleChangePassword);
+            
+            // Password strength checker
+            if (newPasswordInput) {
+                newPasswordInput.addEventListener('input', checkPasswordStrength);
+            }
+            
+            // Share buttons
+            document.getElementById('shareWhatsAppBtnModal').addEventListener('click', shareViaWhatsApp);
+            document.getElementById('copyLinkBtnModal').addEventListener('click', copyLink);
+            document.getElementById('shareFacebookBtn').addEventListener('click', shareOnFacebook);
+            
+            // QR code generation
+            generateQRBtn.addEventListener('click', generateQRCode);
+            downloadQRBtn.addEventListener('click', downloadQRCode);
+            
+            // Orders filter
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const filter = this.getAttribute('data-filter');
+                    initializeOrders(filter);
+                });
+            });
+            
+            // Notification buttons
+            markAllReadBtn.addEventListener('click', markAllNotificationsAsRead);
+            clearNotificationsBtn.addEventListener('click', clearAllNotifications);
+            
+            // Contact Developer buttons
+            contactDeveloperBtn.addEventListener('click', toggleDeveloperDetails);
+            contactDeveloperBtnShare.addEventListener('click', toggleDeveloperDetails);
+            
+            // WhatsApp Developer button
+            if (whatsappDeveloperBtn) {
+                whatsappDeveloperBtn.addEventListener('click', () => {
+                    const message = encodeURIComponent(`Hello Developer,\n\nI saw your work on Maria Nail Studio website and I'm interested in:\n\n1. Website Development\n2. Mobile App Design\n3. Booking System\n\nPlease send me more information about your services and pricing.\n\nThank you!`);
+                    const whatsappUrl = `https://wa.me/254700000000?text=${message}`;
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
+            
+            // Terms acceptance
+            acceptTermsCheckbox.addEventListener('change', function() {
+                confirmTermsBtn.disabled = !this.checked;
+            });
+            
+            confirmTermsBtn.addEventListener('click', processBookingAfterTerms);
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === bookingModal) bookingModal.style.display = 'none';
+                if (e.target === accountModal) accountModal.style.display = 'none';
+                if (e.target === qrModal) qrModal.style.display = 'none';
+                if (e.target === receiptModal) receiptModal.style.display = 'none';
+                if (e.target === termsAcceptanceModal) {
+                    termsAcceptanceModal.style.display = 'none';
+                    bookingModal.style.display = 'flex';
+                }
+            });
+            
+            // Escape key to close modals
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (accountModal.style.display === 'flex') accountModal.style.display = 'none';
+                    if (bookingModal.style.display === 'flex') bookingModal.style.display = 'none';
+                    if (qrModal.style.display === 'flex') qrModal.style.display = 'none';
+                    if (receiptModal.style.display === 'flex') receiptModal.style.display = 'none';
+                    if (termsAcceptanceModal.style.display === 'flex') {
+                        termsAcceptanceModal.style.display = 'none';
+                        bookingModal.style.display = 'flex';
+                    }
+                }
+            });
+        }
+
+        // Setup order button listeners
+        function setupOrderButtonListeners() {
+            // Download receipt buttons
+            document.querySelectorAll('.download-receipt-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const orderId = this.getAttribute('data-order');
+                    showReceipt(orderId);
+                });
+            });
+            
+            // Reorder buttons
+            document.querySelectorAll('.reorder-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const orderId = this.getAttribute('data-order');
+                    reorderService(orderId);
+                });
+            });
+            
+            // Cancel order buttons
+            document.querySelectorAll('.cancel-order-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const orderId = this.getAttribute('data-order');
+                    cancelOrder(orderId);
+                });
+            });
+        }
+
+        // Setup notification button listeners
+        function setupNotificationButtonListeners() {
+            // Mark notification as read
+            document.querySelectorAll('.mark-read-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const notificationId = this.getAttribute('data-id');
+                    markNotificationAsRead(notificationId);
+                });
+            });
+            
+            // Delete notification
+            document.querySelectorAll('.delete-notification-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const notificationId = this.getAttribute('data-id');
+                    deleteNotification(notificationId);
+                });
+            });
+        }
+
+        // Toggle developer details
+        function toggleDeveloperDetails() {
+            if (developerDetails) {
+                developerDetails.style.display = developerDetails.style.display === 'none' ? 'block' : 'none';
+            } else {
+                const message = encodeURIComponent(`Hello Developer,\n\nI'm interested in your web development services for my business.\n\nPlease contact me for a discussion.\n\nThank you!`);
+                const whatsappUrl = `https://wa.me/254700000000?text=${message}`;
+                window.open(whatsappUrl, '_blank');
+            }
+        }
+
+        // Get user data from localStorage
+        function getUserData() {
+            const userData = localStorage.getItem('userData');
+            return userData ? JSON.parse(userData) : null;
+        }
+
+        // Save user data to localStorage
+        function saveUserData(userData) {
+            localStorage.setItem('userData', JSON.stringify(userData));
+        }
+
+        // Get user orders from localStorage
+        function getUserOrders() {
+            const orders = localStorage.getItem('userOrders');
+            if (!orders) {
+                const sampleOrders = [
+                    {
+                        id: "ORD-001",
+                        service: "Gel Nails",
+                        date: new Date(Date.now() - 86400000 * 7).toISOString().split('T')[0],
+                        price: 1500,
+                        status: "completed",
+                        items: [{ name: "Gel Nails", price: 1500 }],
+                        location: "At Studio",
+                        time: "14:00"
+                    }
+                ];
+                saveUserOrders(sampleOrders);
+                return sampleOrders;
+            }
+            return JSON.parse(orders);
+        }
+
+        // Save user orders to localStorage
+        function saveUserOrders(orders) {
+            localStorage.setItem('userOrders', JSON.stringify(orders));
+        }
+
+        // Get user notifications from localStorage
+        function getUserNotifications() {
+            const notifications = localStorage.getItem('userNotifications');
+            if (!notifications) {
+                saveUserNotifications(sampleNotifications);
+                return sampleNotifications;
+            }
+            return JSON.parse(notifications);
+        }
+
+        // Save user notifications to localStorage
+        function saveUserNotifications(notifications) {
+            localStorage.setItem('userNotifications', JSON.stringify(notifications));
+        }
+
+        // Check if user has accepted terms
+        function hasAcceptedTerms() {
+            return localStorage.getItem('termsAccepted') === 'true';
+        }
+
+        // Set terms as accepted
+        function setTermsAccepted() {
+            localStorage.setItem('termsAccepted', 'true');
+        }
+
+        // Check login status
+        function checkLoginStatus() {
+            const userData = getUserData();
+            
+            if (userData) {
+                currentUser = userData;
+                loginMenuItem.style.display = 'none';
+                profileActions.style.display = 'flex';
+            } else {
+                loginMenuItem.style.display = 'flex';
+                profileActions.style.display = 'none';
+            }
+        }
+
+        // Load profile data
+        function loadProfileData() {
+            if (!currentUser) {
+                profilePictureContainer.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-user-circle fa-3x" style="color: var(--medium-gray); margin-bottom: 1rem;"></i>
+                        <p>Please login to view your profile</p>
+                    </div>
+                `;
+                profileInfo.innerHTML = '';
+                profileStats.innerHTML = '';
+                return;
+            }
+            
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase();
+            
+            profilePictureContainer.innerHTML = `
+                ${currentUser.profilePicture ? 
+                    `<img src="${currentUser.profilePicture}" alt="${currentUser.name}">` : 
+                    `<span>${initials}</span>`
+                }
+                <div class="profile-picture-input" id="uploadProfilePicture">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" id="profilePictureInput" accept="image/*" style="display: none;">
+                </div>
+            `;
+            
+            document.getElementById('uploadProfilePicture').addEventListener('click', () => {
+                document.getElementById('profilePictureInput').click();
+            });
+            
+            document.getElementById('profilePictureInput').addEventListener('change', uploadProfilePicture);
+            
+            profileInfo.innerHTML = `
+                <h4>${currentUser.name}</h4>
+                <p>${currentUser.isGuest ? 'Guest User' : 'Premium Member'}</p>
+                <p><i class="fas fa-phone"></i> ${currentUser.phone}</p>
+                ${currentUser.email ? `<p><i class="fas fa-envelope"></i> ${currentUser.email}</p>` : ''}
+                ${currentUser.address ? `<p><i class="fas fa-map-marker-alt"></i> ${currentUser.address}</p>` : ''}
+            `;
+            
+            const userOrders = getUserOrders();
+            const totalSpent = userOrders.reduce((sum, order) => sum + parseInt(order.price), 0);
+            const completedOrders = userOrders.filter(order => order.status === 'completed').length;
+            
+            profileStats.innerHTML = `
+                <div class="stat">
+                    <div class="stat-value">${userOrders.length}</div>
+                    <div class="stat-label">Total Orders</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">${completedOrders}</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">KSH ${totalSpent.toLocaleString()}</div>
+                    <div class="stat-label">Total Spent</div>
+                </div>
+            `;
+        }
+
+        // Load settings forms
+        function loadSettingsForms() {
+            if (!currentUser) {
+                document.getElementById('settingsContent').innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-user-circle fa-3x" style="color: var(--medium-gray); margin-bottom: 1rem;"></i>
+                        <p>Please login to access settings</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            document.getElementById('editName').value = currentUser.name;
+            document.getElementById('editEmail').value = currentUser.email || '';
+            document.getElementById('editPhone').value = currentUser.phone;
+            document.getElementById('editAddress').value = currentUser.address || '';
+        }
+
+        // Check password strength
+        function checkPasswordStrength() {
+            const password = document.getElementById('newPassword').value;
+            const strengthMeter = document.getElementById('passwordStrength');
+            const requirements = {
+                length: password.length >= 6,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password),
+                number: /[0-9]/.test(password)
+            };
+            
+            document.getElementById('reqLength').className = requirements.length ? 'requirement met' : 'requirement not-met';
+            document.getElementById('reqUppercase').className = requirements.uppercase ? 'requirement met' : 'requirement not-met';
+            document.getElementById('reqLowercase').className = requirements.lowercase ? 'requirement met' : 'requirement not-met';
+            document.getElementById('reqNumber').className = requirements.number ? 'requirement met' : 'requirement not-met';
+            
+            let score = 0;
+            if (requirements.length) score++;
+            if (requirements.uppercase) score++;
+            if (requirements.lowercase) score++;
+            if (requirements.number) score++;
+            
+            strengthMeter.className = 'password-strength-meter';
+            if (score === 0) {
+                strengthMeter.style.width = '0%';
+            } else if (score === 1) {
+                strengthMeter.className += ' strength-weak';
+            } else if (score === 2) {
+                strengthMeter.className += ' strength-fair';
+            } else if (score === 3) {
+                strengthMeter.className += ' strength-good';
+            } else {
+                strengthMeter.className += ' strength-strong';
+            }
+        }
+
+        // Handle login
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('loginPhone').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!phone || !password) {
+                alert('Please enter both phone number and password.');
+                return;
+            }
+            
+            const normalizedPhone = phone.replace(/\D/g, '');
+            let user = null;
+            
+            if (defaultUsers[normalizedPhone]) {
+                user = defaultUsers[normalizedPhone];
+            } else {
+                const storedUsers = JSON.parse(localStorage.getItem('storedUsers') || '{}');
+                if (storedUsers[normalizedPhone]) {
+                    user = storedUsers[normalizedPhone];
+                }
+            }
+            
+            if (user && password === user.password) {
+                currentUser = { ...user, phone: normalizedPhone };
+                saveUserData(currentUser);
+                
+                currentUser.visits = (currentUser.visits || 0) + 1;
+                saveUserData(currentUser);
+                
+                alert('Login successful!');
+                
+                loginMenuItem.style.display = 'none';
+                profileActions.style.display = 'flex';
+                showAccountSection('profile');
+                
+                loginForm.reset();
+                loadProfileData();
+                
+                addNotification(
+                    "Welcome Back!",
+                    `Welcome back to Maria Nail Art Studio, ${currentUser.name}!`,
+                    "success"
+                );
+            } else {
+                alert('Invalid phone number or password. Please try again.');
+            }
+        }
+
+        // Handle guest login
+        function handleGuestLogin() {
+            currentUser = {
+                phone: `guest_${Date.now()}`,
+                name: "Guest User",
+                email: "",
+                address: "",
+                visits: 1,
+                totalSpent: 0,
+                profilePicture: null,
+                isGuest: true,
+                password: "nail123"
+            };
+            saveUserData(currentUser);
+            
+            alert('Welcome! You are now logged in as a guest.');
+            
+            loginMenuItem.style.display = 'none';
+            profileActions.style.display = 'flex';
+            showAccountSection('profile');
+            
+            loadProfileData();
+            
+            addNotification(
+                "Welcome!",
+                "Welcome to Maria Nail Art Studio! Enjoy browsing our services.",
+                "info"
+            );
+        }
+
+        // Handle logout
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('userData');
+                currentUser = null;
+                
+                loginMenuItem.style.display = 'flex';
+                profileActions.style.display = 'none';
+                showAccountSection('login');
+                
+                alert('Logged out successfully.');
+            }
+        }
+
+        // Upload profile picture
+        function uploadProfilePicture(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file.');
+                return;
+            }
+            
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Image size should be less than 5MB.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentUser.profilePicture = e.target.result;
+                saveUserData(currentUser);
+                loadProfileData();
+                
+                addNotification(
+                    "Profile Picture Updated",
+                    "Your profile picture has been updated successfully.",
+                    "success"
+                );
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Handle edit profile
+        function handleEditProfile(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                alert('Please login first.');
+                return;
+            }
+            
+            const name = document.getElementById('editName').value.trim();
+            const email = document.getElementById('editEmail').value.trim();
+            const phone = document.getElementById('editPhone').value.trim();
+            const address = document.getElementById('editAddress').value.trim();
+            
+            if (!name || !phone) {
+                alert('Name and phone number are required.');
+                return;
+            }
+            
+            currentUser.name = name;
+            currentUser.email = email;
+            currentUser.phone = phone;
+            currentUser.address = address;
+            
+            saveUserData(currentUser);
+            
+            if (!currentUser.isGuest) {
+                const storedUsers = JSON.parse(localStorage.getItem('storedUsers') || '{}');
+                storedUsers[phone] = currentUser;
+                localStorage.setItem('storedUsers', JSON.stringify(storedUsers));
+            }
+            
+            showAccountSection('profile');
+            
+            addNotification(
+                "Profile Updated",
+                "Your profile information has been updated successfully.",
+                "success"
+            );
+            
+            alert('Profile updated successfully!');
+        }
+
+        // Handle change password
+        function handleChangePassword(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                alert('Please login first.');
+                return;
+            }
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (currentPassword !== currentUser.password) {
+                alert('Current password is incorrect.');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                alert('New password must be at least 6 characters long.');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match.');
+                return;
+            }
+            
+            currentUser.password = newPassword;
+            saveUserData(currentUser);
+            
+            if (!currentUser.isGuest) {
+                const storedUsers = JSON.parse(localStorage.getItem('storedUsers') || '{}');
+                storedUsers[currentUser.phone] = currentUser;
+                localStorage.setItem('storedUsers', JSON.stringify(storedUsers));
+            }
+            
+            changePasswordForm.reset();
+            document.getElementById('passwordStrength').style.width = '0%';
+            
+            addNotification(
+                "Password Changed",
+                "Your password has been changed successfully.",
+                "success"
+            );
+            
+            alert('Password changed successfully!');
+        }
+
+        // Toggle dark/light theme
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            const icon = themeToggle.querySelector('i');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Filter services based on search
+        function filterServices() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            serviceCards.forEach(card => {
+                const serviceName = card.querySelector('.service-name').textContent.toLowerCase();
+                const serviceDesc = card.querySelector('.service-description').textContent.toLowerCase();
+                
+                if (serviceName.includes(searchTerm) || serviceDesc.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Open booking modal with service details
+        function openBookingModal(serviceId) {
+            const service = services.find(s => s.id === serviceId);
+            if (!service) return;
+            
+            bookingModalTitle.textContent = `Book ${service.name}`;
+            document.getElementById('bookingServiceName').value = service.name;
+            document.getElementById('bookingServicePrice').value = service.price;
+            document.getElementById('bookingServiceId').value = service.id;
+            
+            bookingModal.style.display = 'flex';
+        }
+
+        // Submit booking form
+        function submitBooking(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                alert('Please login or continue as guest first.');
+                accountModal.style.display = 'flex';
+                showAccountSection('login');
+                bookingModal.style.display = 'none';
+                return;
+            }
+            
+            // Check if first order and terms not accepted
+            const userOrders = getUserOrders();
+            if (userOrders.length === 0 && !hasAcceptedTerms()) {
+                bookingModal.style.display = 'none';
+                termsAcceptanceModal.style.display = 'flex';
+                
+                // Store booking data temporarily
+                storeBookingData();
+                return;
+            }
+            
+            // Process booking if terms already accepted
+            processBooking();
+        }
+
+        // Store booking data temporarily
+        function storeBookingData() {
+            const bookingData = {
+                serviceId: document.getElementById('bookingServiceId').value,
+                serviceName: document.getElementById('bookingServiceName').value,
+                servicePrice: document.getElementById('bookingServicePrice').value,
+                name: document.getElementById('bookingName').value || currentUser.name,
+                phone: document.getElementById('bookingPhone').value || currentUser.phone,
+                location: document.querySelector('input[name="location"]:checked').value,
+                date: document.getElementById('bookingDate').value,
+                time: document.getElementById('bookingTime').value,
+                notes: document.getElementById('bookingNotes').value,
+                address: document.querySelector('input[name="location"]:checked').value === 'home' 
+                    ? document.getElementById('homeAddress').value 
+                    : ''
+            };
+            
+            sessionStorage.setItem('pendingBooking', JSON.stringify(bookingData));
+        }
+
+        // Process booking after terms acceptance
+        function processBookingAfterTerms() {
+            if (!acceptTermsCheckbox.checked) {
+                alert('Please accept the Terms & Conditions to continue.');
+                return;
+            }
+            
+            setTermsAccepted();
+            processBooking();
+        }
+
+        // Process booking
+        function processBooking() {
+            let bookingData;
+            const pendingBooking = sessionStorage.getItem('pendingBooking');
+            
+            if (pendingBooking) {
+                bookingData = JSON.parse(pendingBooking);
+                sessionStorage.removeItem('pendingBooking');
+            } else {
+                bookingData = {
+                    serviceId: document.getElementById('bookingServiceId').value,
+                    serviceName: document.getElementById('bookingServiceName').value,
+                    servicePrice: document.getElementById('bookingServicePrice').value,
+                    name: document.getElementById('bookingName').value || currentUser.name,
+                    phone: document.getElementById('bookingPhone').value || currentUser.phone,
+                    location: document.querySelector('input[name="location"]:checked').value,
+                    date: document.getElementById('bookingDate').value,
+                    time: document.getElementById('bookingTime').value,
+                    notes: document.getElementById('bookingNotes').value,
+                    address: document.querySelector('input[name="location"]:checked').value === 'home' 
+                        ? document.getElementById('homeAddress').value 
+                        : ''
+                };
+            }
+            
+            const bookingDate = new Date(bookingData.date);
+            const formattedDate = bookingDate.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            let message = `Hello Maria Nail Art Studio! I would like to book an appointment:\n\n`;
+            message += `*Service:* ${bookingData.serviceName}\n`;
+            message += `*Price:* KSH ${parseInt(bookingData.servicePrice).toLocaleString()}\n`;
+            message += `*Name:* ${bookingData.name}\n`;
+            message += `*Phone:* ${bookingData.phone}\n`;
+            message += `*Location:* ${bookingData.location === 'studio' ? 'At Studio' : 'Home Service'}\n`;
+            if (bookingData.address) message += `*Address:* ${bookingData.address}\n`;
+            message += `*Date:* ${formattedDate}\n`;
+            message += `*Time:* ${bookingData.time}\n`;
+            if (bookingData.notes) message += `*Notes:* ${bookingData.notes}\n`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/254712345678?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+            showBookingConfirmation();
+            
+            bookingModal.style.display = 'none';
+            termsAcceptanceModal.style.display = 'none';
+            
+            bookingForm.reset();
+            setMinBookingDate();
+            homeAddressGroup.style.display = 'none';
+            
+            addNewOrder(bookingData.serviceId, bookingData.serviceName, bookingData.servicePrice, 
+                        bookingData.date, bookingData.time, bookingData.location, bookingData.address);
+        }
+
+        // Add new order
+        function addNewOrder(serviceId, serviceName, servicePrice, date, time, location, address) {
+            const orderId = `ORD-${Date.now().toString().substr(-6)}`;
+            const newOrder = {
+                id: orderId,
+                service: serviceName,
+                date: date,
+                price: servicePrice,
+                status: "pending",
+                items: [{ name: serviceName, price: servicePrice }],
+                location: location === 'studio' ? 'At Studio' : 'Home Service',
+                time: time,
+                address: address,
+                timestamp: new Date().toISOString()
+            };
+            
+            const userOrders = getUserOrders();
+            userOrders.unshift(newOrder);
+            saveUserOrders(userOrders);
+            
+            if (currentUser) {
+                currentUser.totalSpent = (currentUser.totalSpent || 0) + parseInt(servicePrice);
+                saveUserData(currentUser);
+            }
+            
+            addNotification(
+                "Appointment Booked",
+                `Your ${serviceName} appointment has been booked for ${formatDate(date)} at ${time}`,
+                "success"
+            );
+            
+            alert('Booking successful! Check your notifications for details.');
+        }
+
+        // Add notification
+        function addNotification(title, message, type = 'info') {
+            const newNotification = {
+                id: Date.now().toString(),
+                title: title,
+                message: message,
+                type: type,
+                time: new Date().toISOString(),
+                read: false
+            };
+            
+            const userNotifications = getUserNotifications();
+            userNotifications.unshift(newNotification);
+            saveUserNotifications(userNotifications);
+            
+            updateNotificationBadge(userNotifications);
+        }
+
+        // Mark notification as read
+        function markNotificationAsRead(notificationId) {
+            const userNotifications = getUserNotifications();
+            const notificationIndex = userNotifications.findIndex(n => n.id == notificationId);
+            
+            if (notificationIndex !== -1) {
+                userNotifications[notificationIndex].read = true;
+                saveUserNotifications(userNotifications);
+                loadNotifications();
+                updateNotificationBadge(userNotifications);
+            }
+        }
+
+        // Mark all notifications as read
+        function markAllNotificationsAsRead() {
+            const userNotifications = getUserNotifications();
+            userNotifications.forEach(notification => {
+                notification.read = true;
+            });
+            saveUserNotifications(userNotifications);
+            loadNotifications();
+            updateNotificationBadge(userNotifications);
+        }
+
+        // Delete notification
+        function deleteNotification(notificationId) {
+            const userNotifications = getUserNotifications();
+            const notificationIndex = userNotifications.findIndex(n => n.id == notificationId);
+            
+            if (notificationIndex !== -1) {
+                userNotifications.splice(notificationIndex, 1);
+                saveUserNotifications(userNotifications);
+                loadNotifications();
+                updateNotificationBadge(userNotifications);
+            }
+        }
+
+        // Clear all notifications
+        function clearAllNotifications() {
+            if (confirm("Are you sure you want to clear all notifications?")) {
+                saveUserNotifications([]);
+                loadNotifications();
+                updateNotificationBadge([]);
+            }
+        }
+
+        // Show booking confirmation
+        function showBookingConfirmation() {
+            bookingConfirmation.style.display = 'flex';
+            
+            setTimeout(() => {
+                bookingConfirmation.style.display = 'none';
+            }, 3000);
+        }
+
+        // Submit contact form
+        function submitContactForm(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const phone = document.getElementById('contactPhone').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            alert(`Thank you ${name}! Your message has been received. We'll contact you at ${phone} within 24 hours.`);
+            
+            contactForm.reset();
+        }
+
+        // Share via WhatsApp
+        function shareViaWhatsApp() {
+            const shareText = "Check out Maria Nail Art Studio! Beautiful nail services with professional care. Book your appointment now!";
+            const url = window.location.href;
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + url)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Copy link to clipboard
+        function copyLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Website link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy link. Please try again.');
+            });
+        }
+
+        // Share on Facebook
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        }
+
+        // Generate QR Code
+        function generateQRCode() {
+            const url = window.location.href;
+            document.getElementById('qrcode').innerHTML = '';
+            new QRCode(document.getElementById('qrcode'), {
+                text: url,
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            qrModal.style.display = 'flex';
+        }
+
+        // Download QR Code
+        function downloadQRCode() {
+            const canvas = document.querySelector('#qrcode canvas');
+            if (canvas) {
+                const link = document.createElement('a');
+                link.download = 'maria-nail-studio-qr.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }
+        }
+
+        // Show receipt
+        function showReceipt(orderId) {
+            const userOrders = getUserOrders();
+            const order = userOrders.find(o => o.id === orderId);
+            
+            if (!order) {
+                alert('Order not found.');
+                return;
+            }
+            
+            const total = parseInt(order.price);
+            const tax = total * 0.16;
+            const grandTotal = total + tax;
+            
+            receiptContent.innerHTML = `
+                <div class="receipt">
+                    <div class="receipt-header">
+                        <h3>Maria Nail Art Studio</h3>
+                        <p>Westlands Shopping Mall, 3rd Floor</p>
+                        <p>Nairobi, Kenya</p>
+                        <p>+254 712 345 678 | info@marianailstudio.co.ke</p>
+                    </div>
+                    
+                    <div class="receipt-details">
+                        <div class="receipt-item">
+                            <span>Receipt #:</span>
+                            <span>${order.id}</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span>Date:</span>
+                            <span>${formatDate(order.date)}</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span>Time:</span>
+                            <span>${order.time}</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span>Customer:</span>
+                            <span>${currentUser?.name || 'Guest'}</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span>Location:</span>
+                            <span>${order.location}</span>
+                        </div>
+                        ${order.address ? `
+                        <div class="receipt-item">
+                            <span>Address:</span>
+                            <span>${order.address}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="receipt-items">
+                        <h4 style="margin-bottom: 1rem;">Services</h4>
+                        ${order.items.map(item => `
+                            <div class="receipt-item">
+                                <span>${item.name}</span>
+                                <span>KSH ${parseInt(item.price).toLocaleString()}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="receipt-total">
+                        <span>Subtotal:</span>
+                        <span>KSH ${total.toLocaleString()}</span>
+                    </div>
+                    <div class="receipt-item">
+                        <span>VAT (16%):</span>
+                        <span>KSH ${tax.toFixed(2)}</span>
+                    </div>
+                    <div class="receipt-total">
+                        <span>Total Paid:</span>
+                        <span>KSH ${grandTotal.toFixed(2)}</span>
+                    </div>
+                    
+                    <div class="receipt-footer">
+                        <p>Thank you for choosing Maria Nail Art Studio!</p>
+                        <p>Receipt generated on: ${new Date().toLocaleDateString()}</p>
+                        <p>Terms: All sales are final. Service guaranteed for 7 days.</p>
+                    </div>
+                </div>
+            `;
+            
+            receiptModal.style.display = 'flex';
+            
+            downloadReceiptBtn.onclick = () => downloadReceiptAsPDF(order);
+        }
+
+        // Download receipt as PDF
+        function downloadReceiptAsPDF(order) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(20);
+            doc.setTextColor(236, 72, 153);
+            doc.text("Maria Nail Art Studio", 105, 20, null, null, 'center');
+            
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            doc.text("Westlands Shopping Mall, 3rd Floor", 105, 30, null, null, 'center');
+            doc.text("Nairobi, Kenya | +254 712 345 678", 105, 35, null, null, 'center');
+            doc.text("info@marianailstudio.co.ke", 105, 40, null, null, 'center');
+            
+            doc.setFontSize(12);
+            doc.text(`Receipt #: ${order.id}`, 20, 55);
+            doc.text(`Date: ${formatDate(order.date)}`, 20, 60);
+            doc.text(`Time: ${order.time}`, 20, 65);
+            doc.text(`Customer: ${currentUser?.name || 'Guest'}`, 20, 70);
+            doc.text(`Location: ${order.location}`, 20, 75);
+            
+            if (order.address) {
+                doc.text(`Address: ${order.address}`, 20, 80);
+            }
+            
+            doc.line(20, 85, 190, 85);
+            
+            doc.setFontSize(14);
+            doc.text("Services", 20, 95);
+            
+            let yPos = 105;
+            order.items.forEach(item => {
+                doc.text(item.name, 20, yPos);
+                doc.text(`KSH ${parseInt(item.price).toLocaleString()}`, 160, yPos, null, null, 'right');
+                yPos += 10;
+            });
+            
+            const total = parseInt(order.price);
+            const tax = total * 0.16;
+            const grandTotal = total + tax;
+            
+            doc.line(20, yPos, 190, yPos);
+            yPos += 10;
+            
+            doc.text("Subtotal:", 20, yPos);
+            doc.text(`KSH ${total.toLocaleString()}`, 160, yPos, null, null, 'right');
+            yPos += 10;
+            
+            doc.text("VAT (16%):", 20, yPos);
+            doc.text(`KSH ${tax.toFixed(2)}`, 160, yPos, null, null, 'right');
+            yPos += 10;
+            
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'bold');
+            doc.text("Total Paid:", 20, yPos);
+            doc.text(`KSH ${grandTotal.toFixed(2)}`, 160, yPos, null, null, 'right');
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            yPos += 20;
+            doc.text("Thank you for choosing Maria Nail Art Studio!", 105, yPos, null, null, 'center');
+            yPos += 5;
+            doc.text("Receipt generated on: " + new Date().toLocaleDateString(), 105, yPos, null, null, 'center');
+            yPos += 5;
+            doc.text("Terms: All sales are final. Service guaranteed for 7 days.", 105, yPos, null, null, 'center');
+            
+            doc.save(`receipt-${order.id}.pdf`);
+        }
+
+        // Reorder service
+        function reorderService(orderId) {
+            const userOrders = getUserOrders();
+            const order = userOrders.find(o => o.id === orderId);
+            if (order) {
+                const service = services.find(s => s.name === order.items[0].name);
+                if (service) {
+                    openBookingModal(service.id);
+                    accountModal.style.display = 'none';
+                }
+            }
+        }
+
+        // Cancel order
+        function cancelOrder(orderId) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                const userOrders = getUserOrders();
+                const orderIndex = userOrders.findIndex(o => o.id === orderId);
+                
+                if (orderIndex !== -1) {
+                    userOrders[orderIndex].status = 'cancelled';
+                    saveUserOrders(userOrders);
+                    
+                    const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                    initializeOrders(activeFilter);
+                    
+                    addNotification(
+                        "Order Cancelled",
+                        `Your order #${orderId} has been cancelled.`,
+                        "warning"
+                    );
+                    
+                    alert('Order cancelled successfully.');
+                }
+            }
+        }
+
+        // Load user preferences
+        function loadUserPreferences() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggle.querySelector('i').className = 'fas fa-sun';
+            }
+        }
+    </script>
+</body>
+</html>
